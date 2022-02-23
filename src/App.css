@@ -1,0 +1,174 @@
+body{
+  @apply bg-bodyBg bg-no-repeat bg-cover text-white font-rubik;
+}
+.heading-primary{
+  @apply  md:text-40 text-32 md:leading-42 leading-34 md:px-0 px-5 font-sansation font-bold;
+}
+.subHead {
+  @apply  font-sansation;
+}
+.sub-heading{
+  @apply md:text-20 text-16 md:leading-30 leading-6 md:px-0 px-5 my-6;
+}
+.bgGradient{
+  @apply bg-gradient-to-r from-grLeft to-grRight;
+}
+svg{
+  @apply inline-block
+}
+.main-nav:hover:after, .main-nav.nav-active:after {
+  content: '';
+  @apply h-6px w-6px bg-blMenu hidden md:block mx-auto rounded-full;
+}
+
+/*====Vision==========*/
+.btn-primary{
+  @apply bg-gradient-to-r from-grLeft to-grRight md:text-25 text-18 px-8 py-4 text-black font-bold font-roboto rounded-10;
+}
+.btn-size{
+ @apply text-20 px-8 py-2;
+} 
+.slickNft .card-nft {
+  margin: 0 25px;
+  @apply bg-black bg-opacity-70 p-10 rounded-20 relative mb-6 aspect-square flex justify-center items-center;
+}
+.slickNft .card-nft:before {
+  content:'';
+  @apply border border-dashed border-grRight absolute top-20px left-20px w-99 h-99  rounded-20 -z-1;
+}
+.slickNft .slick-prev,.slickNft .slick-next,
+.OurTeam .slick-prev,.OurTeam .slick-next
+{
+  @apply top-auto -bottom-20 h-40 w-40;
+}
+.slickNft .slick-prev:before,.slickNft  .slick-next:before,
+.OurTeam .slick-prev:before,.OurTeam  .slick-next:before
+{
+  @apply text-transparent w-40 h-40 text-40 bg-contain;
+}
+.slickNft .slick-prev:before, .OurTeam .slick-prev:before{
+  @apply bg-lftIcon;
+}
+.slickNft .slick-next:before, .OurTeam .slick-next:before{
+  @apply bg-rgtIcon;
+}
+.slickNft .slick-prev , .OurTeam .slick-prev, .slickNft .slick-next , .OurTeam .slick-next {
+  left: 50%;
+}
+.slickNft .slick-prev , .OurTeam .slick-prev {
+  transform: translateX(-50%) translateX(-30px);
+}
+.slickNft .slick-next , .OurTeam .slick-next{
+  transform: translateX(-50%) translateX(30px);
+}
+.card-team {
+  @apply text-center mx-6;
+}
+.OurTeam .slick-slide:nth-child(odd) .card-team {
+  @apply mt-14;
+}
+.card-team img{
+  @apply w-full;
+}
+.card-team .teamDtl{
+  @apply mt-5;
+}
+.card-team h4{
+  @apply text-28 text-wTitle font-bold capitalize;
+}
+.card-team p{
+  @apply text-20 font-normal;
+}
+/* 
+  @apply text-20 px-8 py-2 mt-0;
+} */
+.borderWhite5{
+  border-color:#ffffff6f;
+}
+/* ankit css */
+body{
+  @apply box-border;
+}
+.header-logo-part img{
+  @apply w-100
+}
+
+.header_navigation li{
+  @apply px-4;
+}
+.header_button{
+  @apply px-5;
+}
+.header_button a{
+  @apply px-5 py-3 bg-black text-black font-medium rounded-md inline-block;	
+}
+.pricing-btn {
+  @apply mt-6 md:mt-10 inline-block md:text-25 text-14 px-4 md:px-10 py-3 md:py-4 ;
+}
+.field-input input[type="text"]::placeholder{
+  @apply text-white;
+}
+.field-input textarea::placeholder{
+  @apply text-white;
+}
+.yellow-btn input{
+ @apply w-full px-1 py-2 uppercase;
+} 
+
+/* ========= Footer ============= */
+.social_icons li a{
+  @apply px-1 hover:text-wTitle;
+}
+.footerWidget + .footerWidget {
+  @apply lg:mt-0 mt-6;
+}
+
+.range::after {
+    content: "|";
+    font-size: 20px;
+    position: relative;
+    top: -7px;
+}
+
+.slide_buttons_Wrapper .header_button{
+  @apply pl-0 pr-2 text-black;
+}
+.slide_buttons_Wrapper .header_button a{
+  @apply text-black text-17 m-0;
+}
+.social_icons li{
+  @apply px-2
+}
+.main-slider-wrapper .slick-dots li button:before{
+  @apply flex items-center justify-center text-transparent rounded-full	border-3 border-white	opacity-100	;		
+}
+.main-slider-wrapper .slick-dots li.slick-active button:before{
+  @apply border-5	border-primary text-transparent bg-black opacity-100;
+}
+.slide_buttons_Wrapper ul{
+  @apply hidden md:flex;
+}
+ .why-choose.w-full {
+ @apply before:content-[''] before:absolute before:top-50pr before:translate-y-2/4 before:-left-106px before:bg-yellocircle before:bg-cover before:h-76 before:w-76;
+} 
+
+.accept-btn input:checked ~ .checkmark {
+  background-color: none;
+}
+.checkmark {
+  @apply after:content-[''] after:absolute after:hidden;
+}
+.accept-btn input:checked ~ .checkmark:after {
+  display: block;
+}
+.accept-btn .checkmark:after {
+left: 6px;
+top: 2px;
+width: 6px;
+height: 11px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
