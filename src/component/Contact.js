@@ -4,15 +4,16 @@ import { ErrorMessage } from "@hookform/error-message";
 import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import ReCAPTCHA from "react-google-recaptcha";
+import { useRecaptcha } from "react-hook-recaptcha";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const MySwal = withReactContent(Swal);
 
-export default function Pricing() {
-  const recaptchaRef = useRef();
+const sitekey = "6LcvQZweAAAAAC-YzRS6ASguX-216umPqLytaVNf";
+const containerId = "bom-recaptcha";
 
+export default function Pricing() {
   const {
     register,
     handleSubmit,
@@ -23,10 +24,6 @@ export default function Pricing() {
   });
 
   const onSubmit = async (contact_data) => {
-    const token = await recaptchaRef.current.executeAsync();
-
-    console.log("token:", token);
-
     const { data } = await axios.post(
       "https://api.bomcoin.com/send_email",
       contact_data
@@ -45,8 +42,22 @@ export default function Pricing() {
     }
   };
 
-  const onCaptchaChange = (value) => {
-    console.log("Captcha value:", value);
+  const successCallback = (response) =>
+    handleSubmit((data) => onSubmit({ ...data, catchaResponse: response }))();
+
+  const { recaptchaLoaded, recaptchaWidget } = useRecaptcha({
+    containerId,
+    successCallback,
+    sitekey,
+    size: "invisible",
+  });
+
+  const executeCaptcha = (e) => {
+    e.preventDefault();
+    if (recaptchaWidget !== null) {
+      window.grecaptcha.reset(recaptchaWidget);
+      window.grecaptcha.execute(recaptchaWidget);
+    }
   };
 
   return (
@@ -67,7 +78,7 @@ export default function Pricing() {
           </p>
         </div>
         <div class="max-w-980 mx-auto">
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={executeCaptcha}>
             <div className="grid-cols-2 grid gap-4">
               <div className="field-input">
                 <input
@@ -277,11 +288,6 @@ export default function Pricing() {
                   />
                 </label>
               </div>
-              <ReCAPTCHA
-                ref={recaptchaRef}
-                sitekey="6LfqHpweAAAAAOyArQjyfITwHWWbV1g3785507EI"
-                onChange={onCaptchaChange}
-              />
               <div className="">
                 <button
                   className="btn-primary w-full"
@@ -298,6 +304,7 @@ export default function Pricing() {
                 </button>
               </div>
             </div>
+            <div id={containerId} />
           </form>
         </div>
       </div>
