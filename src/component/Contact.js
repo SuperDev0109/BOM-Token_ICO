@@ -25,9 +25,17 @@ export default function Pricing() {
       contact_data
     );
     if (data.result === 0) {
-      alert(data.message);
+      MySwal.fire({
+        icon: "error",
+        title: data.message,
+        timer: 1500,
+      });
     } else if (data.result === 1) {
-      alert("Success!");
+      MySwal.fire({
+        icon: "success",
+        title: "Success to send message.",
+        timer: 1500,
+      });
     }
   };
 
