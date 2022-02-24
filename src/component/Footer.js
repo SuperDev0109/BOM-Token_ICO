@@ -99,7 +99,7 @@ const FooterBox = () => {
                             <h3 className='widgetTitle capitalize text-wTitle underline font-semibold font-poppins text-20 mb-4'>Stay in touch</h3>
                             <p className="font-poppins text-16 font-light leading-24">Join our mailing list to get updates.We respect your privacy.</p>
                             <form className='relative mt-6'>
-                                <input type="text" name='newsLetter' placeholder='Email Address' className='w-full h-80 rounded-full px-6 font-poppins text-20 font-normal text-black'/>
+                                <input type="text" name='newsLetter' placeholder='Email Address' className='focus-visible:none w-full h-80 rounded-full px-6 font-poppins text-20 font-normal text-black'/>
                                 <button type='submit' className='bgGradient h-60 w-60 rounded-full text-black text-20 justify-center items-center absolute top-10px right-10px'><FaRegPaperPlane /></button>
                             </form>
                         </div>

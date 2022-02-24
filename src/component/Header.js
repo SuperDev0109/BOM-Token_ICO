@@ -104,7 +104,7 @@ export default function Header() {
                         key={item.name}
                         as="a"
                         href={item.href}
-                        className="text-black hover:bg-gray-700 hover:text-white px-4 py-3 rounded-md text-sm font-medium ml-4 bgGradient"
+                        className="text-black hover:bg-gray-700 hover:text-white px-4 py-3 rounded-md text-sm font-medium ml-4 bgGradient "
                       >
                         {item.name}
                       </Disclosure.Button>
@@ -115,7 +115,7 @@ export default function Header() {
                     {/* Mobile menu button */}
 
 
-                    <Disclosure.Button className="bg-burgerClr inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white hover:bg-burgerClr focus:outline-non">
+                    <Disclosure.Button className="bg-burgerClr focus-visible:outline-none inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white hover:bg-burgerClr focus:outline-non">
                       <span className="sr-only">Open main menu</span>
                       {open ? (
                         <XIcon className="close block h-6 w-6" aria-hidden="true" />
