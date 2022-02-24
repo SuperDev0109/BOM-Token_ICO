@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import ReCAPTCHA from "react-google-recaptcha";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const MySwal = withReactContent(Swal);
 
 export default function Pricing() {
+  const recaptchaRef = useRef();
+
   const {
     register,
     handleSubmit,
@@ -20,6 +23,10 @@ export default function Pricing() {
   });
 
   const onSubmit = async (contact_data) => {
+    const token = await recaptchaRef.current.executeAsync();
+
+    console.log("token:", token);
+
     const { data } = await axios.post(
       "https://api.bomcoin.com/send_email",
       contact_data
@@ -36,6 +43,10 @@ export default function Pricing() {
         title: "Success to send message.",
       });
     }
+  };
+
+  const onCaptchaChange = (value) => {
+    console.log("Captcha value:", value);
   };
 
   return (
@@ -266,6 +277,11 @@ export default function Pricing() {
                   />
                 </label>
               </div>
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey="6LfqHpweAAAAAOyArQjyfITwHWWbV1g3785507EI"
+                onChange={onCaptchaChange}
+              />
               <div className="">
                 <button
                   className="btn-primary w-full"
