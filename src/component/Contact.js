@@ -25,16 +25,15 @@ export default function Pricing() {
       contact_data
     );
     if (data.result === 0) {
+      console.error(data.message);
       MySwal.fire({
         icon: "error",
-        title: data.message,
-        timer: 1500,
+        title: "Failed to send message.",
       });
     } else if (data.result === 1) {
       MySwal.fire({
         icon: "success",
         title: "Success to send message.",
-        timer: 1500,
       });
     }
   };
