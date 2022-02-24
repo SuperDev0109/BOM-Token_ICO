@@ -7,7 +7,7 @@ import appStore from '../Images/appStore.png'
 export default function AppSection(){
 	return(
 		<>
-		<div className="appSection mb-26 pb-24 bg-none md:bg-appImage bg-contain bg-right bg-no-repeat">
+		<div className="appSection mb-26 pt-16 md:pt-0 pb-20 md:pb-24 bg-none md:bg-appImage bg-contain bg-right bg-no-repeat">
 		 <div className="container grid grid-cols-1 md:grid-cols-2 gap-10 items-center max-w-1400 mx-auto border-b-1 border-white/20 px-4  md:text-left text-center">
 			 <div className="">
 			<h3 className="text-40 font-sansation mb-5 font-bold">Meet the BOM App</h3>

@@ -1,13 +1,43 @@
-import React from 'react'
+import {React, useState} from 'react'
 import logo_f from '../Images/ftr_logo.png'
 import logo_s from '../Images/ftr_logo_bom.png'
-import { FaRegPaperPlane } from 'react-icons/fa';
+import { FaRegPaperPlane, FaArrowUp } from 'react-icons/fa';
+
 import SocialIcons from './SocialIcons';
 
 const FooterBox = () => {
+
+    
+  const [visible, setVisible] = useState(false)
+  
+  const toggleVisible = () => {
+    const scrolled = document.documentElement.scrollTop;
+    if (scrolled > 300){
+      setVisible(true)
+    } 
+    else if (scrolled <= 300){
+      setVisible(false)
+    }
+  };
+  
+  const scrollToTop = () =>{
+    window.scrollTo({
+      top: 0, 
+      behavior: 'smooth'
+      /* you can also use 'auto' behaviour
+         in place of 'smooth' */
+    });
+  };
+  
+  window.addEventListener('scroll', toggleVisible);
+
     return ( 
         <>
-        <footer className='footer py-20 bg-ftr_bg bg-no-repeat bg-center px-4'>
+ <button onClick={scrollToTop} className={visible ? 'inline fixed bottom-6 right-6 bg-blMenu hover:bg-black text-white w-50 h-50 rounded-full':'none'}>
+    <FaArrowUp />
+</button>
+        
+        <footer className='footer py-12 md:py-20 bg-ftr_bg bg-no-repeat bg-center px-4'>
             <div className='max-w-1400 mx-auto'>
                 <div className='footerTop'>
                     <div className='ftrLogos flex items-center justify-center mb-5'>
@@ -76,13 +106,15 @@ const FooterBox = () => {
                     </div>
                 </div>
                 <div className='footerBottom lg:border-t lg:border-white/10 lg:pt-10'>
-                    <div className='flex flex-wrap lg:flex-nowrap justify-center lg:justify-between px-4 mx-0 lg:-mx-4'>
-                        <div class="copyright text-poppinstext-20"><span className='font-normal'>© 2022</span> <span className='font-bold'><a href="javascript:()" className='text-wTitle'>BOM</a>. All Rights Reserved.</span> </div>
+                    <div className='flex flex-wrap lg:flex-nowrap  justify-center lg:justify-between px-4 mx-0 lg:-mx-4'>
+                        <div class="copyright text-poppins text-center md:text-left"><span className='font-normal'>Copyright © 2022</span> <span className='font-bold'>. All Rights Reserved by <a href="javascript:()" className='text-wTitle'>BOM</a>.</span> </div>
                         <div className='lg:block hidden'><SocialIcons /></div>
                     </div>
                 </div>
             </div>
         </footer>
+
+        
         </>
      );
 }

@@ -22,37 +22,37 @@ export default function TokenSale(){
 	return(
 		<>
 		
-		<div id="Tokenmics" className="token_sale pt-16 pb-24  px-4">
+		<div id="Tokenmics" className="token_sale pt-0 md:pt-16 pb-10 md:pb-24  px-4">
 		<div className='container px-6 md:px-16 md:py-16 py-8  flex flex-wrap mx-auto max-w-1400 items-center bg-tokenBg border-4 border-tokenBorder rounded-xl'>
          <div className="sale-image w-full md:w-2/5">
-		 <Image className="w-full mb-6 md:mb-0 md:pr-10 max-w-95 mx-auto block md:max-w-full" imageName={wallet} alt={wallet}></Image> 
+		 <Image className="w-full mb-6 md:mb-0 md:pr-10 max-w-90% mx-auto block md:max-w-full" imageName={wallet} alt={wallet}></Image> 
 		 </div>
 		 <div className="sale-metar w-full md:w-2/4 flex flex-wrap justify-center">
-			 <h3 className="text-40 font-bold font-sansation m-0 pb-1 pt-0">Token Sale Ends In</h3>
+			 <h3 className="text-26 md:text-40 font-bold font-sansation m-0 pb-1 pt-0">Token Sale Ends In</h3>
 			<div className="timer w-full grid grid-cols-4 gap-5">
 				<div class="hours text-center py-6">
-				<div class="hours-box bg-blMenu text-white text-32 font-bold font text-center h-24 flex items-center justify-center max-w-140 h-110px">
+				<div class="hours-box bg-blMenu text-white text-32 font-bold font text-center flex items-center justify-center max-w-140 h-70 md:h-110px">
 					<span>{days}</span>
 					</div>
-					<h5 className="text-16 pt-4 uppercase">days</h5>
+					<h5 className="text-14 md:text-16 pt-4 uppercase">days</h5>
 				</div>
 				<div class="hours text-center py-6">
-				<div class="hours-box bg-blMenu text-white text-32 font-bold font text-center h-24 flex items-center justify-center max-w-140 h-110px">
+				<div class="hours-box bg-blMenu text-white text-32 font-bold font text-center flex items-center justify-center max-w-140 h-70 md:h-110px">
 					<span>{hours}</span>
 					</div>
-					<h5 className="text-16 pt-4 uppercase">hours</h5>
+					<h5 className="text-14 md:text-16 pt-4 uppercase">hours</h5>
 				</div>
 				<div class="hours text-center py-6">
-				<div class="hours-box bg-blMenu text-white text-32 font-bold font text-center h-24 flex items-center justify-center max-w-140 h-110px">
+				<div class="hours-box bg-blMenu text-white text-32 font-bold font text-center flex items-center justify-center max-w-140 h-70 md:h-110px">
 					<span>{minutes}</span>
 					</div>
-					<h5 className="text-16 pt-4 uppercase">minutes</h5>
+					<h5 className="text-14 md:text-16 pt-4 uppercase">minutes</h5>
 				</div>
 				<div class="hours text-center py-6">
-				<div class="hours-box bg-blMenu text-white text-32 font-bold font text-center h-24 flex items-center justify-center  max-w-140 h-110px">
+				<div class="hours-box bg-blMenu text-white text-32 font-bold font text-center flex items-center justify-center max-w-140 h-70 md:h-110px">
 					<span>{seconds}</span>
 					</div>
-					<h5 className="text-16 pt-4 uppercase">seconds</h5>
+					<h5 className="text-14 md:text-16 pt-4 uppercase">seconds</h5>
 				</div>
 			</div>
 			<div class="range-box w-full mt-7 mb-10">

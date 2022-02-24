@@ -44,10 +44,10 @@ function Timeline() {
   ]
   return (
     <>
-        <section className='py-10 pb-28'>
+        <section className='py-10 pb-16 md:pb-28'>
             <div className='max-w-1400 mx-auto px-5 xl:px-0'>
             
-            <h2 className="heading-primary text-center mb-20">20,000+ Unique NFTs</h2>
+            <h2 className="heading-primary text text-center mb-14 md:mb-20">20,000+ Unique NFTs</h2>
                 <div className='timeline_ladder_wrapper hidden md:flex justify-center px-5'>
                    <div className='text-right md:mt-10 xl:mt-16 grid gap-y-4'>
                       <TimelineLadder
