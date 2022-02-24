@@ -37,7 +37,7 @@ const FooterBox = () => {
     <FaArrowUp />
 </button>
         
-        <footer className='footer py-12 md:py-20 bg-ftr_bg bg-no-repeat bg-center px-4'>
+        <footer className='footer py-12 md:py-20 bg-ftr_bg bg-no-repeat bg-center md:px-4'>
             <div className='max-w-1400 mx-auto'>
                 <div className='footerTop'>
                     <div className='ftrLogos flex items-center justify-center mb-5'>
