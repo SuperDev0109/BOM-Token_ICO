@@ -25,7 +25,7 @@ export default function ImageWithText(){
 		<>
 			<section>
 				<div>
-					<div className="container max-w-1200 mx-auto gap-6 md:gap-10 grid grid-cols-1 md:grid-cols-3 border-b-2 border-white/20 pb-24 mb-24 px-4 text-left md:text-center">
+					<div className="container max-w-1200 mx-auto gap-6 md:gap-10 grid grid-cols-1 md:grid-cols-3 border-b-2 border-white/20 pb-10 md:pb-24 mb-10 md:mb-24 px-4 text-left md:text-center">
 						<TextCard 
 						imageName={card}
 						heading={cardContent[0].title} 

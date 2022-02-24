@@ -5,7 +5,7 @@ import tokensale from '../Images/tokensale.png'
 export default function PrivateSales(){
     return(
         <>
-            <div className='visionBox  py-36 bg-cover bg-no-repeat'>
+            <div id="Roadmap" className='visionBox py-16 md:py-36 bg-cover bg-no-repeat'>
             <div class="max-w-760 mx-auto text-center mb-16">
                 <h2 className="heading-primary">Private Sales</h2>
                 <p class="sub-heading">Our Non-Fungible Tokens will function as the licenses to use BOM. Each company who intends to participate will have to acquire their own NFT.</p>

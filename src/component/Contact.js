@@ -43,7 +43,7 @@ export default function Pricing() {
     <>
       <div
         id="Contact"
-        className="contact-section bg-contactbg py-24 hidden md:block  border-t-2 border-b-2 border-white/20 mt-16 mb-24"
+        className="contact-section bg-contactbg py-24 px-4 border-t-2 border-b-2 border-white/20 mt-16 mb-24"
       >
         <div class="max-w-800 mx-auto text-center mb-16">
           <h4 className="font-sansation uppercase text-wTitle text-25 mb-4">
