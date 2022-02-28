@@ -49,7 +49,6 @@ export default function Pricing() {
     containerId,
     successCallback,
     sitekey,
-    size: "invisible",
   });
 
   const executeCaptcha = (e) => {
@@ -288,6 +287,7 @@ export default function Pricing() {
                   />
                 </label>
               </div>
+              <div id={containerId} />
               <div className="">
                 <button
                   className="btn-primary w-full"
@@ -304,7 +304,6 @@ export default function Pricing() {
                 </button>
               </div>
             </div>
-            <div id={containerId} />
           </form>
         </div>
       </div>
