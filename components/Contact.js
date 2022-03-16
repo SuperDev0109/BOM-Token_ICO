@@ -57,9 +57,7 @@ export default function Pricing() {
           </h4>
           <h2 className="heading-primary">Contact informations</h2>
           <p class="sub-heading">
-            Investigationes demonstraverunt lectores legere elementum pulvinar
-            etiam non quam lacus suspendisse risus nec feugiat in laoreet sit
-            amet cursus.
+            Please send us your message. We will reply soon.
           </p>
         </div>
         <div class="max-w-980 mx-auto">
@@ -151,54 +149,6 @@ export default function Pricing() {
                 <ErrorMessage
                   errors={errors}
                   name="phone"
-                  render={({ messages }) =>
-                    messages &&
-                    Object.entries(messages).map(([type, message]) => (
-                      <p key={type} className="text-red-500">
-                        {message}
-                      </p>
-                    ))
-                  }
-                />
-              </div>
-              <div className="field-input">
-                <input
-                  className="w-full text-20 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  placeholder="Subject"
-                  {...register("subject", {
-                    required: "Subject is required.",
-                  })}
-                />
-                <ErrorMessage
-                  errors={errors}
-                  name="subject"
-                  render={({ messages }) =>
-                    messages &&
-                    Object.entries(messages).map(([type, message]) => (
-                      <p key={type} className="text-red-500">
-                        {message}
-                      </p>
-                    ))
-                  }
-                />
-              </div>
-              <div className="field-input">
-                <input
-                  className="w-full text-20 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
-                  type="text"
-                  id="youraddress"
-                  name="youraddress"
-                  placeholder="Your Address"
-                  {...register("address", {
-                    required: "Address is required.",
-                  })}
-                />
-                <ErrorMessage
-                  errors={errors}
-                  name="address"
                   render={({ messages }) =>
                     messages &&
                     Object.entries(messages).map(([type, message]) => (

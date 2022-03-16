@@ -26,7 +26,7 @@ export default function TokenSale(){
 		 <img className="w-full mb-6 md:mb-0 md:pr-10 max-w-90% mx-auto block md:max-w-full" src={'/images/wallet.png'}/> 
 		 </div>
 		 <div className="sale-metar w-full md:w-2/4 flex flex-wrap justify-center">
-			 <h3 className="text-26 md:text-40 font-bold font-sansation m-0 pb-1 pt-0">Token Sale Ends In</h3>
+			 <h3 className="text-26 md:text-40 font-bold font-sansation m-0 pb-1 pt-0">Token Sale Starts In</h3>
 			<div className="timer w-full grid grid-cols-4 gap-5">
 				<div class="hours text-center py-6">
 				<div class="hours-box bg-blMenu text-white text-32 font-bold font text-center flex items-center justify-center max-w-140 h-70 md:h-110px">
@@ -55,7 +55,7 @@ export default function TokenSale(){
 			</div>
 			<div class="range-box w-full mt-7 mb-10">
             <div className="labels flex flex-wrap justify-between">
-				<span className="text-16 text-white font-Roboto">0</span> <span className="text-16 text-white font-Roboto">24M</span>
+				<span className="text-16 text-white font-Roboto">0</span> <span className="text-16 text-white font-Roboto">1.4M</span>
 			</div>
 			<div className="range bg-white h-4 rounded-xl w-full flex"></div>
 			<div> <input className="slider hidden bg-white h-4 rounded-xl w-full flex" type="range" min="1" max="100" value="50" /></div>
