@@ -26,17 +26,17 @@ export default function HomeSlider() {
       }; 
     const mainslide = [
         {
-            subTitle:'The Digitel Agency',
+            subTitle:'The Digital Agency',
             title : 'Revolutionizing Business Transaction',
             description: 'BOM is a groundbreaking token system developed for completely disrupting the way companies transact with clients'
         },
         {
-            subTitle:'The Digitel Agency',
+            subTitle:'The Digital Agency',
             title : 'Revolutionizing Business Transaction',
             description: 'BOM is a groundbreaking token system developed for completely disrupting the way companies transact with clients 2'
         },
         {
-            subTitle:'The Digitel Agency',
+            subTitle:'The Digital Agency',
             title : 'Revolutionizing Business Transaction',
             description: 'BOM is a groundbreaking token system developed for completely disrupting the way companies transact with clients 3'
         }

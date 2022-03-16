@@ -1,17 +1,17 @@
-import React, { useRef } from "react";
+import React, { createRef } from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { useRecaptcha } from "react-hook-recaptcha";
-
+import ReCAPTCHA from 'react-google-recaptcha'
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const MySwal = withReactContent(Swal);
 
 const sitekey = "6LcvQZweAAAAAC-YzRS6ASguX-216umPqLytaVNf";
-const containerId = "bom-recaptcha";
+
+const recaptchaRef = createRef();
 
 export default function Pricing() {
   const {
@@ -24,6 +24,9 @@ export default function Pricing() {
   });
 
   const onSubmit = async (contact_data) => {
+    
+    const recaptchaValue = recaptchaRef.current.getValue();
+
     const { data } = await axios.post(
       "https://api.bomcoin.com/send_email",
       contact_data
@@ -39,23 +42,6 @@ export default function Pricing() {
         icon: "success",
         title: "Success to send message.",
       });
-    }
-  };
-
-  const successCallback = (response) =>
-    handleSubmit((data) => onSubmit({ ...data, catchaResponse: response }))();
-
-  const { recaptchaLoaded, recaptchaWidget } = useRecaptcha({
-    containerId,
-    successCallback,
-    sitekey,
-  });
-
-  const executeCaptcha = (e) => {
-    e.preventDefault();
-    if (recaptchaWidget !== null) {
-      window.grecaptcha.reset(recaptchaWidget);
-      window.grecaptcha.execute(recaptchaWidget);
     }
   };
 
@@ -77,7 +63,7 @@ export default function Pricing() {
           </p>
         </div>
         <div class="max-w-980 mx-auto">
-          <form onSubmit={executeCaptcha}>
+          <form onSubmit={onSubmit}>
             <div className="grid-cols-2 grid gap-4">
               <div className="field-input">
                 <input
@@ -287,7 +273,10 @@ export default function Pricing() {
                   />
                 </label>
               </div>
-              <div id={containerId} />
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey={sitekey}
+              />
               <div className="">
                 <button
                   className="btn-primary w-full"

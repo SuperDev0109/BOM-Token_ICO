@@ -2,9 +2,6 @@ import React from 'react'
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import nft from '../Images/nft.png';
-import nft1 from '../Images/nft2.png';
-import nft2 from '../Images/nft3.png';
 
 export default function UniqueNFT(){
     var settings = {
@@ -37,38 +34,37 @@ export default function UniqueNFT(){
                 <Slider className='slickNft' {...settings}>
                     <div>
                         <div class="card-nft">
-                            <img src={nft} /> 
+                            <img src={'/images/nft.png'} /> 
                         </div>
                     </div>
                     <div>
                         <div class="card-nft">
-                            <img src={nft1} /> 
+                            <img src={'/images/nft2.png'} /> 
                         </div>
                     </div>
                     <div>
                         <div class="card-nft">
-                            <img src={nft2} alt="" /> 
+                            <img src={'/images/nft3.png'} alt="" /> 
                         </div>
                     </div>
                     <div>
                         <div class="card-nft">
-                            <img src={nft} /> 
+                            <img src={'/images/nft.png'} /> 
                         </div>
                     </div>
                     <div>
                         <div class="card-nft">
-                            <img src={nft1} /> 
+                            <img src={'/images/nft2.png'} /> 
                         </div>
                     </div>
                     <div>
                         <div class="card-nft">
-                            <img src={nft2} /> 
+                            <img src={'/images/nft3.png'} /> 
                         </div>
                     </div>
                 </Slider>
             </div>
-        </div>
-        
+        </div>        
         </>
     )
 

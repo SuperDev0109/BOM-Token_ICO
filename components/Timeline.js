@@ -1,8 +1,6 @@
 import React from 'react'
 import TimelineLadder from './TimelineLadder'
 
-import ladder from '../Images/ladder.png'
-
 function Timeline() {
   const timeline = [
     {
@@ -69,7 +67,7 @@ function Timeline() {
                         </TimelineLadder>   
                    </div> 
                    <div className='px-5'>
-                     <img src={ladder} />
+                     <img src={'/images/ladder.png'} />
                    </div> 
                    <div className='text-left md:mt-44 xl:mt-80 grid gap-y-10 lg:gap-y-20'>
                    <TimelineLadder

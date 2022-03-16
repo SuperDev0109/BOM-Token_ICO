@@ -1,10 +1,6 @@
 import React from 'react'
-import Image from './Image'
-import pricingbg from '../Images/pricingbg.png';
-import token1 from '../Images/token1.png';
-import token2 from '../Images/token2.png';
-export default function Pricing(){
-      
+
+export default function Pricing(){      
    return(
         <>
         <div className='pricing-section bg-pricing pt-16 md:pt-20 pb-16 md:pb-28 px-4 lg:px-0'>
@@ -16,7 +12,7 @@ export default function Pricing(){
                     <div className='cols-2 w-full bg-white/10 rounded-lg py-6 lg:py-12 px-6 lg:px-10'>
                         <div className='flex gap-6 md:gap-16 text-white'>
                             <div className='left-pricing w-2/4 text-center'>
-                                <Image className='mx-auto mb-6' imageName={token1} alt={token1}></Image>
+                                <img className='mx-auto mb-6' src={'/images/token1.png'}/>
                                 <h4 className='font-rubik text-16 md:text-28 uppercase'>Bitcoin</h4>
                                 <h5 className='font-rubik text-14 md:text-24 uppercase text-white/40 mb-6'>BTC</h5>
                                 <div className='price-box bg-white/30 rounded-lg p-2 md:p-5 inline-block'>
@@ -47,7 +43,7 @@ export default function Pricing(){
                     <div className='cols-2 w-full bg-white/10 rounded-lg py-6 lg:py-12 px-6 lg:px-10'>
                         <div className='flex gap-6 md:gap-16 text-white'>
                             <div className='left-pricing w-2/4 text-center'>
-                                <Image className='mx-auto mb-6' imageName={token2} alt={token2}></Image>
+                                <img className='mx-auto mb-6' src={'/images/token2.png'}/>
                                 <h4 className='font-rubik text-16 md:text-28 uppercase  '>Ethereum </h4>
                                 <h5 className='font-rubik text-14 md:text-24 uppercase text-white/40 mb-6'>ETH</h5>
                                 <div className='price-box bg-white/30 rounded-lg inline-block p-2 md:p-5'>

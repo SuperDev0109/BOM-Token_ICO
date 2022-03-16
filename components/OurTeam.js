@@ -3,7 +3,6 @@ import Slider from "react-slick"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-
 const OurTeam = () => {
     var settings = {
         dots: false,
@@ -35,7 +34,7 @@ const OurTeam = () => {
                 <Slider className='OurTeam' {...settings}>
                     <div>
                         <div class="card-team">
-                            <img src={require('../Images/Brian-1.png')} alt="" />
+                            <img src={'/images/Brian-1.png'} alt="" />
                             <div className="teamDtl">
                                 <h4>Lucien Dorman</h4>
                                 <p>Program Director</p>
@@ -44,7 +43,7 @@ const OurTeam = () => {
                     </div>
                    <div>
                         <div class="card-team">
-                            <img src={require('../Images/Brian-2.png')} alt="" />
+                            <img src={'/images/Brian-2.png'} alt="" />
                             <div className="teamDtl">
                                 <h4>Brian Thex</h4>
                                 <p>Game Development</p>
@@ -53,7 +52,7 @@ const OurTeam = () => {
                     </div>
                     <div>
                         <div class="card-team">
-                            <img src={require('../Images/Brian-3.png')} alt="" />
+                            <img src={'/images/Brian-3.png'} alt="" />
                             <div className="teamDtl">
                                 <h4>Frederick Whichello</h4>
                                 <p>Game Algorithm & Mathematics</p>
@@ -62,7 +61,7 @@ const OurTeam = () => {
                     </div>
                     <div>
                         <div class="card-team">
-                        <img src={require('../Images/Brian-4.png')} alt="" />
+                        <img src={'/images/Brian-4.png'} alt="" />
                             <div className="teamDtl">
                                 <h4>Roy Hui</h4>
                                 <p>Chief Technical Advisor</p>
@@ -71,7 +70,7 @@ const OurTeam = () => {
                     </div>
                     <div>
                         <div class="card-team">
-                            <img src={require('../Images/Brian-1.png')} alt="" />
+                            <img src={'/images/Brian-1.png'} alt="" />
                             <div className="teamDtl">
                                 <h4>Lucien Dorman</h4>
                                 <p>Program Director</p>
@@ -80,7 +79,7 @@ const OurTeam = () => {
                     </div>
                    <div>
                         <div class="card-team">
-                            <img src={require('../Images/Brian-2.png')} alt="" />
+                            <img src={'/images/Brian-2.png'} alt="" />
                             <div className="teamDtl">
                                 <h4>Brian Thex</h4>
                                 <p>Game Development</p>

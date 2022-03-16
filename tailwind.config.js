@@ -1,6 +1,8 @@
-module.exports = {
-  
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+module.exports = {  
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}"
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -13,20 +15,20 @@ module.exports = {
         '100%': '100%',
       },
       backgroundImage: {
-        'bodyBg': "url('/src/Images/body-bg.jpg')",
-        'visionBg': "url('/src/Images/vision-bg.png')",
-        'rgtIcon': "url('/src/Images/rgt-icon.png')",
-        'lftIcon': "url('/src/Images/lft-icon.png')",
-        'aboutBg': "url('/src/Images/about-bg.png')",
-        'featuresBg': "url('/src/Images/curve.png')",
-        'cardbg': "url('/src/Images/cardbg.png')",
-        'yellocircle': "url('/src/Images/yellocircle.png')",
-        'boomneed': "url('/src/Images/boomneed.png')",
-        'appImage': "url('/src/Images/appImageBg.png')",        
-        'ftr_bg': "url('/src/Images/ftr_bg.png')",
-        'pricing': "url('/src/Images/pricingbg.png')",
-        'contactbg': "url('/src/Images/contactbg.png')",
-        'headerBg': "url('/src/Images/hdrBg.png')",
+        'bodyBg': "url('/images/body-bg.jpg')",
+        'visionBg': "url('/images/vision-bg.png')",
+        'rgtIcon': "url('/images/rgt-icon.png')",
+        'lftIcon': "url('/images/lft-icon.png')",
+        'aboutBg': "url('/images/about-bg.png')",
+        'featuresBg': "url('/images/curve.png')",
+        'cardbg': "url('/images/cardbg.png')",
+        'yellocircle': "url('/images/yellocircle.png')",
+        'boomneed': "url('/images/boomneed.png')",
+        'appImage': "url('/images/appImageBg.png')",        
+        'ftr_bg': "url('/images/ftr_bg.png')",
+        'pricing': "url('/images/pricingbg.png')",
+        'contactbg': "url('/images/contactbg.png')",
+        'headerBg': "url('/images/hdrBg.png')",
 
       },
       borderRadius: {

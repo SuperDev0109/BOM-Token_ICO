@@ -1,8 +1,6 @@
-// import { Fragment } from 'react'
 import { Disclosure } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { useState,useRef, useEffect } from 'react'
-import logo from '../Images/logo.png' 
 
 const navigation = [
   { name: 'Home', href: '#', current: true },
@@ -26,25 +24,25 @@ function classNames(...classes) {
 export default function Header() {
   const [scroll, setScroll] = useState(false);
   useEffect(() => {
-    window.addEventListener("scroll", () => {
-      setScroll(window.scrollY > 50);
-    });
+    if (typeof window === 'object') {
+      window.addEventListener("scroll", () => {
+        setScroll(window.scrollY > 50);
+      });
+    }
   }, []);
   useEffect(() => {
-    let url = window.location.href.split("/");
-    let target = url[url.length - 1].toLowerCase();
-    let element = document.getElementById(target);
-    element && element.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (typeof window === 'object') {
+      let url = window.location.href.split("/");
+      let target = url[url.length - 1].toLowerCase();
+      let element = document.getElementById(target);
+      element && element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   }, []);
 
   const [selectedNav, setSelectedNav] = useState(0);
   const [open, setOpen] = useState(false);
   return (
-    <>
-      
-      
-       {/* className="md:bg-transparent bg-grayM relative md:absolute left-0 right-0 top-0" */}
-      <div className="min-h-full">
+    <><div className="min-h-full">
       
         <Disclosure as="nav" className={scroll ? "bg-grayM fixed top-0 left-0 right-0 z-full ease-in duration-100 z-10" : "z-10	md:bg-transparent bg-grayM relative md:absolute left-0 right-0 top-0 ease-in duration-100"}>
           {({ open }) => (
@@ -62,7 +60,7 @@ export default function Header() {
                     <div className="flex-shrink-0">
                       <img
                         className={scroll ? "w-8 md:w-10 ease-in duration-100":"w-10 md:w-16 ease-in duration-100"}
-                        src={logo}
+                        src={'/images/logo.png'}
                         alt="Bom"
                       />
                     </div>
@@ -75,21 +73,12 @@ export default function Header() {
                           <a
                             key={item.name}
                             href={item.href}
-                            // className={classNames(
-                            //   item.current
-                            //     ? ''
-                            //     : 'text-white hover:text-blMenu',
-                            //   'main-nav px-3 py-2 rounded-md text-sm font-medium'
-                            // )}
                             className={`main-nav px-3 py-2 rounded-md text-sm font-medium ${index === selectedNav ? 'text-blMenu nav-active' : 'text-white hover:text-blMenu'}`}
                             onClick={e => {
                                 setSelectedNav(index)
-                                //let offsetValue = document.getElementById(item.name).offsetTop + 100;
-                                
                                 let hero = document.getElementById(item.name);
                                 e.preventDefault();
                                 hero && hero.scrollIntoView({ behavior: "smooth", block: "start" });
-                                //window.history.pushState("scroll", "scroll", "/".item.name);
                             }}
                             aria-current={item.current ? 'page' : undefined}
                           >
@@ -112,9 +101,6 @@ export default function Header() {
                     </div>
                   </div>
                   <div className="-mr-2 flex md:hidden">
-                    {/* Mobile menu button */}
-
-
                     <Disclosure.Button className="bg-burgerClr focus-visible:outline-none inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white hover:bg-burgerClr focus:outline-non">
                       <span className="sr-only">Open main menu</span>
                       {open ? (
@@ -141,7 +127,9 @@ export default function Header() {
                                 e.preventDefault();
                                 
                                 hero && hero.scrollIntoView({ behavior: "smooth", block: "start", top: 200 });
-                                window.history.pushState("scroll", "scroll", "/".item.name);
+                                if (typeof window === 'object') {
+                                  window.history.pushState("scroll", "scroll", "/".item.name);
+                                }
                             }}
                             aria-current={item.current ? 'page' : undefined}
                           >

@@ -1,6 +1,4 @@
 import {React, useState} from 'react'
-import logo_f from '../Images/ftr_logo.png'
-import logo_s from '../Images/ftr_logo_bom.png'
 import { FaRegPaperPlane, FaArrowUp } from 'react-icons/fa';
 
 import SocialIcons from './SocialIcons';
@@ -10,7 +8,7 @@ const FooterBox = () => {
     
   const [visible, setVisible] = useState(false)
   
-  const toggleVisible = () => {
+  const onVisible = () => {
     const scrolled = document.documentElement.scrollTop;
     if (scrolled > 300){
       setVisible(true)
@@ -21,16 +19,17 @@ const FooterBox = () => {
   };
   
   const scrollToTop = () =>{
-    window.scrollTo({
-      top: 0, 
-      behavior: 'smooth'
-      /* you can also use 'auto' behaviour
-         in place of 'smooth' */
-    });
+    if (typeof window === 'object') {
+        window.scrollTo({
+            top: 0, 
+            behavior: 'smooth'
+          });
+    }    
   };
   
-  window.addEventListener('scroll', toggleVisible);
-
+  if (typeof window === 'object') {
+    window.addEventListener('scroll', onVisible);
+  }
     return ( 
         <>
  <button onClick={scrollToTop} className={visible ? 'inline fixed bottom-6 right-6 bg-blMenu hover:bg-black text-white w-50 h-50 rounded-full':'none'}>
@@ -41,8 +40,8 @@ const FooterBox = () => {
             <div className='max-w-1400 mx-auto'>
                 <div className='footerTop'>
                     <div className='ftrLogos flex items-center justify-center mb-5'>
-                        <img src={logo_f} alt="" />
-                        <img src={logo_s} alt="" />
+                        <img src={'/images/ftr_logo.png'}/>
+                        <img src={'/images/ftr_logo_bom.png'}/>
                     </div>
                     <div className='socialIcon flex justify-center'>
                         <SocialIcons/>

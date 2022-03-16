@@ -79,9 +79,6 @@ svg{
 .card-team p{
   @apply text-20 font-normal;
 }
-/* 
-  @apply text-20 px-8 py-2 mt-0;
-} */
 .borderWhite5{
   border-color:#ffffff6f;
 }

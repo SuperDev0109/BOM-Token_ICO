@@ -1,7 +1,5 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import Image from './Image'
-import wallet from '../Images/wallet.png'
 
 const targetTime = new Date("2022-04-01").getTime();
 export default function TokenSale(){
@@ -25,7 +23,7 @@ export default function TokenSale(){
 		<div id="Tokenmics" className="token_sale pt-0 md:pt-16 pb-10 md:pb-24  px-4">
 		<div className='container px-6 md:px-16 md:py-16 py-8  flex flex-wrap mx-auto max-w-1400 items-center bg-tokenBg border-4 border-tokenBorder rounded-xl'>
          <div className="sale-image w-full md:w-2/5">
-		 <Image className="w-full mb-6 md:mb-0 md:pr-10 max-w-90% mx-auto block md:max-w-full" imageName={wallet} alt={wallet}></Image> 
+		 <img className="w-full mb-6 md:mb-0 md:pr-10 max-w-90% mx-auto block md:max-w-full" src={'/images/wallet.png'}/> 
 		 </div>
 		 <div className="sale-metar w-full md:w-2/4 flex flex-wrap justify-center">
 			 <h3 className="text-26 md:text-40 font-bold font-sansation m-0 pb-1 pt-0">Token Sale Ends In</h3>
