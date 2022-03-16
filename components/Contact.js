@@ -187,7 +187,7 @@ export default function Pricing() {
               <div className="field-input">
                 <label
                   className="accept-btn font-poppins text-20 relative mt-3 mb-8 block"
-                  htmlfor="accept"
+                  htmlFor="accept"
                 >
                   <input
                     className="opacity-0 mr-3 w-20 h-20 relative top-0.5"

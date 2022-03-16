@@ -74,8 +74,8 @@ const OurTeam = () => {
                 </div>
                 <Slider className='OurTeam' {...settings}>
                     {
-                        teams.map(m=>
-                            <div>
+                        teams.map((m, i)=>
+                            <div key={i}>
                                 <div className="card-team border p-4 rounded-lg border-yellow-300">
                                     <div className="teamDtl">
                                         <h4>{m.name}</h4>
