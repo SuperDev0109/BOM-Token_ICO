@@ -106,7 +106,7 @@ const FooterBox = () => {
                 </div>
                 <div className='footerBottom lg:border-t lg:border-white/10 lg:pt-10'>
                     <div className='flex flex-wrap lg:flex-nowrap  justify-center lg:justify-between px-4 mx-0 lg:-mx-4'>
-                        <div class="copyright text-poppins text-center md:text-left"><span className='font-normal'>Copyright © 2022</span> <span className='font-bold'>. All Rights Reserved by <a href="javascript:()" className='text-wTitle'>BOM</a>.</span> </div>
+                        <div className="copyright text-poppins text-center md:text-left"><span className='font-normal'>Copyright © 2022</span> <span className='font-bold'>. All Rights Reserved by <a href="javascript:()" className='text-wTitle'>BOM</a>.</span> </div>
                         <div className='lg:block hidden'><SocialIcons /></div>
                     </div>
                 </div>

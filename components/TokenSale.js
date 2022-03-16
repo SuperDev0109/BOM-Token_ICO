@@ -28,32 +28,32 @@ export default function TokenSale(){
 		 <div className="sale-metar w-full md:w-2/4 flex flex-wrap justify-center">
 			 <h3 className="text-26 md:text-40 font-bold font-sansation m-0 pb-1 pt-0">Token Sale Starts In</h3>
 			<div className="timer w-full grid grid-cols-4 gap-5">
-				<div class="hours text-center py-6">
-				<div class="hours-box bg-blMenu text-white text-32 font-bold font text-center flex items-center justify-center max-w-140 h-70 md:h-110px">
+				<div className="hours text-center py-6">
+				<div className="hours-box bg-blMenu text-white text-32 font-bold font text-center flex items-center justify-center max-w-140 h-70 md:h-110px">
 					<span>{days}</span>
 					</div>
 					<h5 className="text-14 md:text-16 pt-4 uppercase">days</h5>
 				</div>
-				<div class="hours text-center py-6">
-				<div class="hours-box bg-blMenu text-white text-32 font-bold font text-center flex items-center justify-center max-w-140 h-70 md:h-110px">
+				<div className="hours text-center py-6">
+				<div className="hours-box bg-blMenu text-white text-32 font-bold font text-center flex items-center justify-center max-w-140 h-70 md:h-110px">
 					<span>{hours}</span>
 					</div>
 					<h5 className="text-14 md:text-16 pt-4 uppercase">hours</h5>
 				</div>
-				<div class="hours text-center py-6">
-				<div class="hours-box bg-blMenu text-white text-32 font-bold font text-center flex items-center justify-center max-w-140 h-70 md:h-110px">
+				<div className="hours text-center py-6">
+				<div className="hours-box bg-blMenu text-white text-32 font-bold font text-center flex items-center justify-center max-w-140 h-70 md:h-110px">
 					<span>{minutes}</span>
 					</div>
 					<h5 className="text-14 md:text-16 pt-4 uppercase">minutes</h5>
 				</div>
-				<div class="hours text-center py-6">
-				<div class="hours-box bg-blMenu text-white text-32 font-bold font text-center flex items-center justify-center max-w-140 h-70 md:h-110px">
+				<div className="hours text-center py-6">
+				<div className="hours-box bg-blMenu text-white text-32 font-bold font text-center flex items-center justify-center max-w-140 h-70 md:h-110px">
 					<span>{seconds}</span>
 					</div>
 					<h5 className="text-14 md:text-16 pt-4 uppercase">seconds</h5>
 				</div>
 			</div>
-			<div class="range-box w-full mt-7 mb-10">
+			<div className="range-box w-full mt-7 mb-10">
             <div className="labels flex flex-wrap justify-between">
 				<span className="text-16 text-white font-Roboto">0</span> <span className="text-16 text-white font-Roboto">1.4M</span>
 			</div>

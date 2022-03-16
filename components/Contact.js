@@ -51,16 +51,16 @@ export default function Pricing() {
         id="Contact"
         className="contact-section bg-contactbg py-24 px-4 border-t-2 border-b-2 border-white/20 mt-16 mb-24"
       >
-        <div class="max-w-800 mx-auto text-center mb-16">
+        <div className="max-w-800 mx-auto text-center mb-16">
           <h4 className="font-sansation uppercase text-wTitle text-25 mb-4">
             CONTACTS
           </h4>
           <h2 className="heading-primary">Contact informations</h2>
-          <p class="sub-heading">
+          <p className="sub-heading">
             Please send us your message. We will reply soon.
           </p>
         </div>
-        <div class="max-w-980 mx-auto">
+        <div className="max-w-980 mx-auto">
           <form onSubmit={onSubmit}>
             <div className="grid-cols-2 grid gap-4">
               <div className="field-input">
