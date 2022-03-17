@@ -4,7 +4,7 @@ import { ErrorMessage } from "@hookform/error-message";
 import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import ReCAPTCHA from 'react-google-recaptcha'
+import ReCAPTCHA from "react-google-recaptcha";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const MySwal = withReactContent(Swal);
@@ -24,7 +24,6 @@ export default function Pricing() {
   });
 
   const onSubmit = async (contact_data) => {
-    
     const recaptchaValue = recaptchaRef.current.getValue();
 
     const { data } = await axios.post(
@@ -32,7 +31,6 @@ export default function Pricing() {
       contact_data
     );
     if (data.result === 0) {
-      console.error(data.message);
       MySwal.fire({
         icon: "error",
         title: "Failed to send message.",
@@ -223,10 +221,7 @@ export default function Pricing() {
                   />
                 </label>
               </div>
-              <ReCAPTCHA
-                ref={recaptchaRef}
-                sitekey={sitekey}
-              />
+              <ReCAPTCHA ref={recaptchaRef} sitekey={sitekey} />
               <div className="">
                 <button
                   className="btn-primary w-full"
