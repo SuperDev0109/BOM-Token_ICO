@@ -27,9 +27,9 @@
   },
   "scripts": {
     "lint": "next lint",
-    "dev": "next dev -p 4000",
+    "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start -p 4000 -H 0.0.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.3",

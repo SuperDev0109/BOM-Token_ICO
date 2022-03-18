@@ -125,7 +125,7 @@ export default function Login() {
               href="#"
               className="text-grey-dark text-sm no-underline hover:text-grey-darker"
             >
-              I don't have an account
+              I dont have an account
             </a>
           </p>
         </div>
