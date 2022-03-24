@@ -10,7 +10,22 @@ export const isMetaMaskInstalled = () => {
 
 export const readAddress = async () => {
   if (typeof window === "object") {
-    return await window.ethereum.request({ method: "eth_requestAccounts" });
+    const accounts = await window.ethereum.request({
+      method: "eth_requestAccounts",
+    });
+    return accounts[0];
+  } else {
+    return null;
+  }
+};
+
+export const readSign = async (account) => {
+  if (typeof window === "object") {
+    const message = "Hello";
+    return await window.ethereum.request({
+      method: "personal_sign",
+      params: [message, account],
+    });
   } else {
     return false;
   }
@@ -26,15 +41,15 @@ function getSelectedAddress() {
 
 const MetaMaskConnect = ({ onChange }) => {
   const [address, setAddress] = useState(getSelectedAddress());
+  const [sign, setSign] = useState();
 
   const switchWallet = async () => {
     const selectedAddress = await readAddress();
+    const sign = await readSign(selectedAddress);
+    if (selectedAddress) setAddress(selectedAddress);
+    if (sign) setSign(sign);
 
-    if (selectedAddress) {
-      setAddress(selectedAddress);
-    } else {
-    }
-    onChange(selectedAddress);
+    onChange(selectedAddress, sign);
   };
 
   useEffect(() => {
@@ -61,17 +76,17 @@ const MetaMaskConnect = ({ onChange }) => {
   }, [onChange]);
 
   if (!isMetaMaskInstalled()) {
-    return <>No wallet found. Please install MetaMask.</>;
+    return <div>No wallet found. Please install MetaMask.</div>;
   }
 
   if (address) {
-    return <button>Connected with {address}</button>;
+    return <div>Connected with {address}</div>;
   }
 
   return (
-    <button className="btn-primary w-full" onClick={switchWallet}>
+    <div className="btn-primary w-full" onClick={switchWallet}>
       Connect Wallet
-    </button>
+    </div>
   );
 };
 

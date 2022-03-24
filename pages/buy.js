@@ -23,15 +23,14 @@ const calcRate = (coin) => {
 };
 
 export default function Buy() {
-  const [fromAddress, setFromAddress] = useState(
-    "0x68b1dc8d168c0b0edc2000e0ee73c71e105b00c0"
-  );
-  const [toAddress, setToAddress] = useState(
-    "0x4C8fb98D57D2eC4b9AED38f169f42386B011c5E3"
-  );
+  const [fromAddress, setFromAddress] = useState("");
+  const [sign, setSign] = useState("");
+  const [toAddress, setToAddress] = useState("");
+  const [ethBalance, setEthBalance] = useState(0);
 
-  const addressChanged = useCallback((address) => {
+  const addressChanged = useCallback((address, sign) => {
     setFromAddress(address);
+    setSign(sign);
   }, []);
 
   const [pay_amount, setPayAmount] = useState(0);
@@ -39,19 +38,45 @@ export default function Buy() {
   const [current_coin, setCurrentCoin] = useState(coins[0]);
   const [rate, setRate] = useState(1);
 
-  const metaMaskPay = async () => {
+  const handleGetBalance = async () => {
+    console.log("[SPIDER] {}", 1, fromAddress, sign);
+    const balance = await window.ethereum.request({
+      method: "eth_getBalance",
+      params: [fromAddress, "latest"],
+    });
+    console.log("[SPIDER]", 2, balance);
+    const wei = parseInt(balance, 16);
+    const gwei = wei / Math.pow(10, 9);
+    const eth = wei / Math.pow(10, 18);
+    console.log("[SPIDER]", 3, eth);
+    setEthBalance(eth);
+    console.log("[SPIDER]", 4, "OK");
+  };
+
+  const convertFloat2Hex = (amount) => {
+    const amountHex = (amount * Math.pow(10, 18)).toString(16);
+    return amountHex;
+  };
+
+  const metaMaskPay = async (amount = 0.03) => {
+    const hexAmount = convertFloat2Hex(amount);
+    await handleGetBalance();
+    if (ethBalance < hexAmount) {
+      console.log("Balance is less than send amount:", ethBalance, hexAmount);
+      return;
+    }
+    console.log("Balance is enough than send amount:", ethBalance, hexAmount);
     try {
       const params = [
         {
-          from: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
-          to: "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
+          from: fromAddress,
+          to: "0x4C8fb98D57D2eC4b9AED38f169f42386B011c5E3",
           gas: "0x76c0", // 30400
-          gasPrice: "0x9184e72a000", // 10000000000000
-          value: "0x9184e72a", // 2441406250
-          data: "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675",
+          // gasPrice: "0x9184e72a000", // 10000000000000
+          value: hexAmount, // 2441406250
         },
       ];
-
+      console.log("Just before transfer:");
       const transactionHash = await ethereum.request({
         method: "eth_sendTransaction",
         params,
@@ -84,6 +109,7 @@ export default function Buy() {
         <div className="container mx-auto py-8">
           <div className="w-5/6 lg:w-1/2 mx-auto rounded shadow">
             <MetaMaskConnect onChange={addressChanged} />
+            <div>balance:{ethBalance}</div>
             <div className="py-4 px-8 text-white text-4xl font-bold text-center">
               Buy
             </div>
@@ -124,7 +150,10 @@ export default function Buy() {
               <div>{rate} USDT per 1 BOM</div>
             </div>
             <div className="grid-cols-1 grid gap-4 mt-4">
-              <button className="btn-primary w-full" onClick={metaMaskPay}>
+              <button
+                className="btn-primary w-full"
+                onClick={() => metaMaskPay(0.03)}
+              >
                 Pay
               </button>
             </div>

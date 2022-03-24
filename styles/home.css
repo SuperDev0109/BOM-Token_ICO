@@ -99,6 +99,9 @@ body{
 .header_button a{
   @apply px-5 py-3 bg-black text-black font-medium rounded-md inline-block;	
 }
+.started_button a{
+  @apply px-5 py-3 bg-black text-black font-medium rounded-md inline-block;	
+}
 .pricing-btn {
   @apply mt-6 md:mt-10 inline-block md:text-25 text-14 px-4 md:px-10 py-3 md:py-4 ;
 }
@@ -131,6 +134,12 @@ body{
   @apply pl-0 pr-2 text-black;
 }
 .slide_buttons_Wrapper .header_button a{
+  @apply text-black text-17 m-0;
+}
+.slide_buttons_Wrapper .started_button{
+  @apply pl-0 pr-2 text-black;
+}
+.slide_buttons_Wrapper .started_button a{
   @apply text-black text-17 m-0;
 }
 .social_icons li{
