@@ -8,29 +8,6 @@ export const isMetaMaskInstalled = () => {
   }
 };
 
-export const readAddress = async () => {
-  if (typeof window === "object") {
-    const accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
-    return accounts[0];
-  } else {
-    return null;
-  }
-};
-
-export const readSign = async (account) => {
-  if (typeof window === "object") {
-    const message = "Hello";
-    return await window.ethereum.request({
-      method: "personal_sign",
-      params: [message, account],
-    });
-  } else {
-    return false;
-  }
-};
-
 function getSelectedAddress() {
   if (typeof window === "object") {
     return window.ethereum?.selectedAddress;
@@ -43,25 +20,66 @@ const MetaMaskConnect = ({ onChange }) => {
   const [address, setAddress] = useState(getSelectedAddress());
   const [sign, setSign] = useState();
 
-  const switchWallet = async () => {
-    const selectedAddress = await readAddress();
-    const sign = await readSign(selectedAddress);
-    if (selectedAddress) setAddress(selectedAddress);
-    if (sign) setSign(sign);
+  const readAddress = async () => {
+    if (typeof window === "object") {
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      setAddress(accounts[0]);
+      return true;
+    } else {
+      return false;
+    }
+  };
 
-    onChange(selectedAddress, sign);
+  const readSign = async (account) => {
+    if (typeof window === "object") {
+      const message = "Hello";
+      const new_sign = await window.ethereum.request({
+        method: "personal_sign",
+        params: [message, account],
+      });
+      setSign(new_sign);
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const ethEnabled = async () => {
+    if (typeof window.ethereum !== "undefined") {
+      // Instance web3 with the provided information from the MetaMask provider information
+      // web3 = new Web3(window.ethereum);
+      try {
+        // Request account access
+        await window.ethereum.enable();
+
+        return true;
+      } catch (e) {
+        // User denied access
+        return false;
+      }
+    }
+
+    return false;
+  };
+
+  const switchWallet = async () => {
+    if (await !ethEnabled()) {
+      alert("Please install MetaMask to use this dApp!");
+    }
+    // Get selectedAddress & Sign from Metamask
+    await readAddress();
   };
 
   useEffect(() => {
     const eventName = `accountsChanged`;
-
     if (!isMetaMaskInstalled()) {
       return;
     }
 
     const listener = ([selectedAddress]) => {
       setAddress(selectedAddress);
-      onChange(selectedAddress);
     };
 
     if (typeof window === "object") {
@@ -75,18 +93,29 @@ const MetaMaskConnect = ({ onChange }) => {
     };
   }, [onChange]);
 
-  if (!isMetaMaskInstalled()) {
+  useEffect(() => {
+    readSign();
+  }, [address]);
+
+  useEffect(() => {
+    onChange(address, sign);
+  }, [sign]);
+
+  if (!isMetaMaskInstalled() && typeof window === "object") {
     return <div>No wallet found. Please install MetaMask.</div>;
   }
-
-  if (address) {
-    return <div>Connected with {address}</div>;
-  }
-
   return (
-    <div className="btn-primary w-full" onClick={switchWallet}>
-      Connect Wallet
-    </div>
+    <>
+      {address && <div>Connected with {address}</div>}
+      {!address && (
+        <div
+          className="bg-blue-500 px-4 py-2 float-right rounded-10"
+          onClick={switchWallet}
+        >
+          Connect Wallet
+        </div>
+      )}
+    </>
   );
 };
 
