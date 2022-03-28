@@ -1,12 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-import MetaMaskConnect, {
-  isMetaMaskInstalled,
-} from "../components/MetaMaskConnect";
+import MetaMaskConnect from "../components/MetaMaskConnect";
 import DropDown from "../components/DropDown";
-
-const MySwal = withReactContent(Swal);
 
 const coins = ["USDC", "USDT", "MATIC"];
 
@@ -25,7 +19,6 @@ const calcRate = (coin) => {
 export default function Buy() {
   const [fromAddress, setFromAddress] = useState("");
   const [sign, setSign] = useState("");
-  const [toAddress, setToAddress] = useState("");
   const [ethBalance, setEthBalance] = useState(0);
 
   const addressChanged = useCallback((address, sign) => {
@@ -39,18 +32,14 @@ export default function Buy() {
   const [rate, setRate] = useState(1);
 
   const handleGetBalance = async () => {
-    console.log("[SPIDER] {}", 1, fromAddress, sign);
     const balance = await window.ethereum.request({
       method: "eth_getBalance",
       params: [fromAddress, "latest"],
     });
-    console.log("[SPIDER]", 2, balance);
     const wei = parseInt(balance, 16);
     const gwei = wei / Math.pow(10, 9);
     const eth = wei / Math.pow(10, 18);
-    console.log("[SPIDER]", 3, eth);
     setEthBalance(eth);
-    console.log("[SPIDER]", 4, "OK");
   };
 
   const convertFloat2Hex = (amount) => {
@@ -58,8 +47,8 @@ export default function Buy() {
     return amountHex;
   };
 
-  const metaMaskPay = async (amount = 0.03) => {
-    const hexAmount = convertFloat2Hex(amount);
+  const metaMaskPay = async () => {
+    const hexAmount = convertFloat2Hex(pay_amount);
     await handleGetBalance();
     if (ethBalance < hexAmount) {
       console.log("Balance is less than send amount:", ethBalance, hexAmount);
@@ -71,12 +60,10 @@ export default function Buy() {
         {
           from: fromAddress,
           to: "0x4C8fb98D57D2eC4b9AED38f169f42386B011c5E3",
-          gas: "0x76c0", // 30400
-          // gasPrice: "0x9184e72a000", // 10000000000000
-          value: hexAmount, // 2441406250
+          gas: "0x76c0",
+          value: hexAmount,
         },
       ];
-      console.log("Just before transfer:");
       const transactionHash = await ethereum.request({
         method: "eth_sendTransaction",
         params,
@@ -85,6 +72,57 @@ export default function Buy() {
     } catch (error) {
       console.error("send exception:", error);
     }
+  };
+
+  const giveUSDT = async () => {
+    // const Web3 = require('web3')
+    // const Tx = require('ethereumjs-tx').Transaction
+    // const Web3js = new Web3(new Web3.providers.HttpProvider('https://polygon-mainnet.infura.io/v3/key%27))
+    // let tokenAddress = '0x' // HST contract address
+    // let toAddress = '0x' // where to send it
+    // let fromAddress = '0x' // your wallet
+    // let privateKey = Buffer.from('key', 'hex')
+    // let contractABI = [
+    //   {
+    //     'constant': false,
+    //     'inputs': [
+    //       {
+    //         'name': '_to',
+    //         'type': 'address'
+    //       },
+    //       {
+    //         'name': '_value',
+    //         'type': 'uint256'
+    //       }
+    //     ],
+    //     'name': 'transfer',
+    //     'outputs': [
+    //       {
+    //         'name': '',
+    //         'type': 'bool'
+    //       }
+    //     ],
+    //     'type': 'function'
+    //   }
+    // ]
+    // let contract = new Web3js.eth.Contract(contractABI, tokenAddress, {from: fromAddress})
+    // let amount = Web3js.utils.toHex(1e18)
+    // Web3js.eth.getTransactionCount(fromAddress)
+    //   .then((count) => {
+    //     let rawTransaction = {
+    //       'from': fromAddress,
+    //       'gasPrice': Web3js.utils.toHex(20 * 1e9),
+    //       'gasLimit': Web3js.utils.toHex(210000),
+    //       'to': tokenAddress,
+    //       'value': 0x0,
+    //       'data': contract.methods.transfer(toAddress, amount).encodeABI(),
+    //       'nonce': Web3js.utils.toHex(count)
+    //     }
+    //     let transaction = new Tx(rawTransaction)
+    //     transaction.sign(privateKey)
+    //     Web3js.eth.sendSignedTransaction('0x' + transaction.serialize().toString('hex'))
+    //       .on('transactionHash', console.log)
+    //   })
   };
 
   useEffect(() => {
@@ -150,11 +188,11 @@ export default function Buy() {
               <div>{rate} USDT per 1 BOM</div>
             </div>
             <div className="grid-cols-1 grid gap-4 mt-4">
-              <button
-                className="btn-primary w-full"
-                onClick={() => metaMaskPay(0.03)}
-              >
+              <button className="btn-primary w-full" onClick={metaMaskPay}>
                 Pay
+              </button>
+              <button className="btn-primary w-full" onClick={giveUSDT}>
+                Give USDT
               </button>
             </div>
           </div>

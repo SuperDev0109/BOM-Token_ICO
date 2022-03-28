@@ -10,9 +10,9 @@ export default function GetStarted(props) {
         router.push("/register");
       }}
     >
-      <a href="#" className="btn-size btn-primary hidden lg:inline-block">
+      <span className="btn-size btn-primary hidden lg:inline-block cursor-pointer">
         Get Started!
-      </a>
+      </span>
     </div>
   );
 }

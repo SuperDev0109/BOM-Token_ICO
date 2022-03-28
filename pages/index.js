@@ -8,11 +8,9 @@ import Faqs from "../components/Faqs";
 import PrivateSales from "../components/PrivateSales";
 import TokenSale from "../components/TokenSale";
 import SecureBlockchain from "../components/SecureBlockchain";
-import ImageWithText from "../components/ImageWithText";
 import AppSection from "../components/AppSection";
 import HomeSlider from "../components/HomeSlider";
 import Pricing from "../components/Pricing";
-import Contact from "../components/Contact";
 import Timeline from "../components/Timeline";
 import OurTeam from "../components/OurTeam";
 
@@ -21,6 +19,7 @@ function Index() {
     <div className="App">
       <Header />
       <HomeSlider />
+      <About />
       <UniqueNFT />
       <Features />
       <Pricing />
@@ -29,9 +28,7 @@ function Index() {
       <SecureBlockchain />
       <imgWithText />
       <Timeline />
-
       <OurTeam />
-      <Contact />
       <AppSection />
       <Faqs />
       <FooterBox />

@@ -4,8 +4,8 @@ import GetStarted from "./GetStarted";
 export default function About() {
   return (
     <div
+      className="visionBox bg-none pb-16 md:pb-18 bg-cover bg-no-repeat relative  w-5/6 mx-auto pt-48"
       id="About"
-      className="visionBox bg-none pt-1 pb-16 md:pb-18 bg-cover bg-no-repeat relative  w-5/6 mx-auto"
     >
       <div className="mx-auto text-white px-4 lg:text-left text-center">
         <div className="flex flex-wrap items-start -mx-4 flex-col-reverse lg:flex-row">

@@ -50,7 +50,6 @@ export default function HomeSlider() {
               slideDescription={mainslide[0].description}
             />
             <Vision visionId="vision" />
-            <About />
           </Slider2>
         </div>
       </div>
