@@ -15,6 +15,7 @@
     "ethereumjs-tx": "^2.1.2",
     "moment": "^2.29.1",
     "next": "^12.1.0",
+    "node-fetch": "^3.2.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-google-recaptcha": "^2.1.0",

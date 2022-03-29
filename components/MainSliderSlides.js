@@ -22,7 +22,12 @@ function MainSliderSlides(props) {
           <p className="text:16 sm:text-20">{props.slideDescription}</p>
           <div className="slide_buttons_Wrapper flex items-center justify-center md:justify-start mt-8 md:mt-16">
             <GetStarted />
-            <Button title="Whitepaper" />
+            <Button
+              title="Whitepaper"
+              onClick={() => {
+                window.open("/api/download", "_blank");
+              }}
+            />
             <SocialIcons />
           </div>
         </div>

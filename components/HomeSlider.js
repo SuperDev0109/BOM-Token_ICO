@@ -4,7 +4,6 @@ import Slider2 from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Vision from "./Vision";
-import About from "./About";
 
 export default function HomeSlider() {
   var settings = {
@@ -33,7 +32,7 @@ export default function HomeSlider() {
       subTitle: "The Digital Agency",
       title: "Revolutionizing Business Transaction",
       description:
-        "BOM is a groundbreaking token system developed for completely disrupting the way companies transact with clients",
+        "BOM is a groundbreaking token system developed to completely enhance the way companies transact with clients",
     },
   ];
   return (
@@ -44,11 +43,14 @@ export default function HomeSlider() {
       >
         <div className="mx-auto px-5 xl:px-0">
           <Slider2 className="main-slider-wrapper" {...settings}>
-            <MainSliderSlides
-              subhead={mainslide[0].subTitle}
-              slideTitle={mainslide[0].title}
-              slideDescription={mainslide[0].description}
-            />
+            {mainslide.map((m, i) => (
+              <MainSliderSlides
+                key={i}
+                subhead={m.subTitle}
+                slideTitle={m.title}
+                slideDescription={m.description}
+              />
+            ))}
             <Vision visionId="vision" />
           </Slider2>
         </div>
