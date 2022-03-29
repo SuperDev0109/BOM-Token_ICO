@@ -19,7 +19,7 @@ export default function About() {
                 To demonstrate the principles of the ecosystem, we’ve created an
                 analogy that highlights the elements of BOM’s mechanism: we
                 provide the rails for the roller coaster (blockchain
-                technology), which synergizes with companies' already existing
+                technology), which synergizes with companies’ already existing
                 power sources, represented by the plane, and tank. The more
                 powerful a company that partners with BOM is, the more profits
                 it will get from the overall transaction revenue, because it can
