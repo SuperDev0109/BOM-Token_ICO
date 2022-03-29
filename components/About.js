@@ -16,13 +16,14 @@ export default function About() {
             <div className="max-w-595 -mt-8 mx-auto">
               <img src={"/images/blockchain.png"} />
               <p className="text-20 leading-30 my-4">
-                BOM’s world-class team dreamt of an ecosystem that propels
-                businesses forward like nothing before, while highly rewarding
-                investors and contributors throughout the process. We’ll allow
-                countless businesses to benefit from blockchain technology that
-                enables leveraging stocks as a payment method, rather than
-                opting for third-party services and paying fees. Essentially,
-                participants will be co-owners of the ecosystem.
+                To demonstrate the principles of the ecosystem, we’ve created an
+                analogy that highlights the elements of BOM’s mechanism: we
+                provide the rails for the roller coaster (blockchain
+                technology), which synergizes with companies' already existing
+                power sources, represented by the plane, and tank. The more
+                powerful a company that partners with BOM is, the more profits
+                it will get from the overall transaction revenue, because it can
+                tow more users on the rails, resulting in increased profits.
               </p>
               <GetStarted />
             </div>

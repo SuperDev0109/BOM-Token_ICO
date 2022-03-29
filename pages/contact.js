@@ -6,6 +6,8 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import ReCAPTCHA from "react-google-recaptcha";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import Header from "../components/Header";
+import FooterBox from "../components/Footer";
 
 const MySwal = withReactContent(Swal);
 
@@ -45,6 +47,7 @@ export default function Pricing() {
 
   return (
     <>
+      <Header />
       <div
         id="Contact"
         className="contact-section bg-contactbg py-24 px-4 border-t-2 border-b-2 border-white/20 mt-16 mb-24"
@@ -55,7 +58,8 @@ export default function Pricing() {
           </h4>
           <h2 className="heading-primary">Contact informations</h2>
           <p className="sub-heading">
-            Please send us your message. We will reply soon.
+            In case you’d like to participate in our initial phases and become
+            one of the early investors, don’t hesitate to reach out any time!
           </p>
         </div>
         <div className="max-w-980 mx-auto">
@@ -241,6 +245,7 @@ export default function Pricing() {
           </form>
         </div>
       </div>
+      <FooterBox />
     </>
   );
 }

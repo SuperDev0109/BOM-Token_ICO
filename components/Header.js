@@ -87,18 +87,14 @@ export default function Header() {
                                   : "text-white hover:text-blMenu"
                               }`}
                               onClick={(e) => {
-                                if (item.name === "Tokenmics") {
-                                  router.push("/tokenmics");
-                                } else {
-                                  setSelectedNav(index);
-                                  let hero = document.getElementById(item.name);
-                                  e.preventDefault();
-                                  hero &&
-                                    hero.scrollIntoView({
-                                      behavior: "smooth",
-                                      block: "start",
-                                    });
-                                }
+                                setSelectedNav(index);
+                                let hero = document.getElementById(item.name);
+                                e.preventDefault();
+                                hero &&
+                                  hero.scrollIntoView({
+                                    behavior: "smooth",
+                                    block: "start",
+                                  });
                               }}
                               aria-current={item.current ? "page" : undefined}
                             >
@@ -146,26 +142,22 @@ export default function Header() {
                           : "text-white hover:text-blMenu"
                       }`}
                       onClick={(e) => {
-                        if (item.name === "Tokenmics") {
-                          router.push("/tokenmics");
-                        } else {
-                          setSelectedNav(index);
-                          let hero = document.getElementById(item.name);
-                          e.preventDefault();
+                        setSelectedNav(index);
+                        let hero = document.getElementById(item.name);
+                        e.preventDefault();
 
-                          hero &&
-                            hero.scrollIntoView({
-                              behavior: "smooth",
-                              block: "start",
-                              top: 200,
-                            });
-                          if (typeof window === "object") {
-                            window.history.pushState(
-                              "scroll",
-                              "scroll",
-                              "/".item.name
-                            );
-                          }
+                        hero &&
+                          hero.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",
+                            top: 200,
+                          });
+                        if (typeof window === "object") {
+                          window.history.pushState(
+                            "scroll",
+                            "scroll",
+                            "/".item.name
+                          );
                         }
                       }}
                       aria-current={item.current ? "page" : undefined}

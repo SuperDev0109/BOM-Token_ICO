@@ -12,6 +12,7 @@ import Pricing from "../components/Pricing";
 import Timeline from "../components/Timeline";
 import OurTeam from "../components/OurTeam";
 import ImageWithText from "../components/ImageWithText";
+import TokenSale from "../components/tokenmics";
 
 function Index() {
   return (
@@ -24,6 +25,7 @@ function Index() {
       <Features />
       <Pricing />
       <PrivateSales />
+      <TokenSale />
       <SecureBlockchain />
       <ImageWithText />
       <Timeline />
