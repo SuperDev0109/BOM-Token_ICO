@@ -8,11 +8,10 @@ import ReCAPTCHA from "react-google-recaptcha";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Header from "../components/Header";
 import FooterBox from "../components/Footer";
+import { validateEmail } from "../util";
 
 const MySwal = withReactContent(Swal);
-
 const sitekey = "6LcvQZweAAAAAC-YzRS6ASguX-216umPqLytaVNf";
-
 const recaptchaRef = createRef();
 
 export default function Pricing() {
@@ -26,21 +25,40 @@ export default function Pricing() {
   });
 
   const onSubmit = async (contact_data) => {
-    const recaptchaValue = recaptchaRef.current.getValue();
+    try {
+      const recaptchaValue = recaptchaRef.current.getValue();
 
-    const { data } = await axios.post(
-      "https://api.bomcoin.com/send_email",
-      contact_data
-    );
-    if (data.result === 0) {
+      if (!recaptchaValue) {
+        MySwal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Please confirm you're not a robot!",
+        });
+        return;
+      }
+
+      console.log("recaptchaValue:", recaptchaValue);
+
+      const { data } = await axios.post(
+        "https://api.bomcoin.com/send_email",
+        contact_data
+      );
+      if (data.result === 0) {
+        MySwal.fire({
+          icon: "error",
+          title: "Failed to send message.",
+        });
+      } else if (data.result === 1) {
+        MySwal.fire({
+          icon: "success",
+          title: "Success to send message.",
+        });
+      }
+    } catch (e) {
       MySwal.fire({
         icon: "error",
-        title: "Failed to send message.",
-      });
-    } else if (data.result === 1) {
-      MySwal.fire({
-        icon: "success",
-        title: "Success to send message.",
+        title: "Oops...",
+        text: "Failed to contact!",
       });
     }
   };
@@ -50,7 +68,7 @@ export default function Pricing() {
       <Header />
       <div
         id="Contact"
-        className="contact-section bg-contactbg py-24 px-4 border-t-2 border-b-2 border-white/20 mt-16 mb-24"
+        className="contact-section bg-contactbg py-24 px-4 border-white/20 mt-16 mb-24"
       >
         <div className="max-w-800 mx-auto text-center mb-16">
           <h4 className="font-sansation uppercase text-wTitle text-25 mb-4">
@@ -63,7 +81,7 @@ export default function Pricing() {
           </p>
         </div>
         <div className="max-w-980 mx-auto">
-          <form onSubmit={onSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid-cols-2 grid gap-4">
               <div className="field-input">
                 <input
@@ -116,12 +134,18 @@ export default function Pricing() {
               <div className="field-input">
                 <input
                   className="w-full text-20 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
-                  type="text"
+                  type="email"
                   id="email"
                   name="email"
                   placeholder="Email"
                   {...register("email", {
                     required: "Email is required.",
+                    validate: (value) => {
+                      if (validateEmail(value)) {
+                        return true;
+                      }
+                      return "Email is invalid.";
+                    },
                   })}
                 />
                 <ErrorMessage
@@ -153,11 +177,14 @@ export default function Pricing() {
                   name="phone"
                   render={({ messages }) =>
                     messages &&
-                    Object.entries(messages).map(([type, message]) => (
-                      <p key={type} className="text-red-500">
-                        {message}
-                      </p>
-                    ))
+                    Object.entries(messages).map(([type, message]) => {
+                      console.log(type, message);
+                      return (
+                        <p key={type} className="text-red-500">
+                          {message}
+                        </p>
+                      );
+                    })
                   }
                 />
               </div>
