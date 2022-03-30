@@ -65,11 +65,12 @@ export default function Header() {
                       <img
                         className={
                           scroll
-                            ? "w-8 md:w-10 ease-in duration-100"
-                            : "w-10 md:w-16 ease-in duration-100"
+                            ? "w-8 md:w-10 ease-in duration-100 cursor-pointer"
+                            : "w-10 md:w-16 ease-in duration-100 cursor-pointer"
                         }
                         src={"/images/logo.png"}
                         alt="Bom"
+                        onClick={() => router.push("/")}
                       />
                     </div>
                   </div>
@@ -87,14 +88,18 @@ export default function Header() {
                                   : "text-white hover:text-blMenu"
                               }`}
                               onClick={(e) => {
-                                setSelectedNav(index);
-                                let hero = document.getElementById(item.name);
-                                e.preventDefault();
-                                hero &&
-                                  hero.scrollIntoView({
-                                    behavior: "smooth",
-                                    block: "start",
-                                  });
+                                if (router.pathname === "/") {
+                                  setSelectedNav(index);
+                                  let hero = document.getElementById(item.name);
+                                  e.preventDefault();
+                                  hero &&
+                                    hero.scrollIntoView({
+                                      behavior: "smooth",
+                                      block: "start",
+                                    });
+                                } else {
+                                  router.push("/");
+                                }
                               }}
                               aria-current={item.current ? "page" : undefined}
                             >

@@ -37,8 +37,6 @@ export default function Pricing() {
         return;
       }
 
-      console.log("recaptchaValue:", recaptchaValue);
-
       const { data } = await axios.post(
         "https://api.bomcoin.com/send_email",
         contact_data

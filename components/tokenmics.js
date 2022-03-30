@@ -5,19 +5,31 @@ const targetTime = new Date("2022-04-01").getTime();
 
 export default function TokenSale() {
   const [currentTime, setCurrentTime] = useState(Date.now());
-  const timeBetween = targetTime - currentTime;
-  const seconds = Math.floor((timeBetween / 1000) % 60);
-  const minutes = Math.floor((timeBetween / 1000 / 60) % 60);
-  const hours = Math.floor((timeBetween / (1000 * 60 * 60)) % 24);
-  const days = Math.floor(timeBetween / (1000 * 60 * 60 * 24));
+
+  const [days, setDays] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+
+  const updateTimes = () => {
+    const timeBetween = targetTime - currentTime;
+    setSeconds(Math.floor((timeBetween / 1000) % 60));
+    setMinutes(Math.floor((timeBetween / 1000 / 60) % 60));
+    setHours(Math.floor((timeBetween / (1000 * 60 * 60)) % 24));
+    setDays(Math.floor(timeBetween / (1000 * 60 * 60 * 24)));
+  };
+
+  useEffect(() => {
+    updateTimes();
+  }, [currentTime]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(Date.now());
     }, 1000);
-
     return () => clearInterval(interval);
   }, []);
+
   return (
     <div
       id="Tokenmics"
@@ -67,13 +79,13 @@ export default function TokenSale() {
             </div>
             <div className="range bg-white h-4 rounded-xl w-full flex"></div>
             <div>
-              {" "}
               <input
-                className="slider hidden bg-white h-4 rounded-xl w-full flex"
+                className="slider hidden bg-white h-4 rounded-xl w-full"
                 type="range"
                 min="1"
                 max="100"
                 value="50"
+                onChange={() => {}}
               />
             </div>
             <h5 className="text-16 font-bold capitalize mt-4 font-Roboto">
