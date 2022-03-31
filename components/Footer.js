@@ -29,12 +29,12 @@ const FooterBox = () => {
       if (data.result === 0) {
         MySwal.fire({
           icon: "error",
-          title: "Failed to send message.",
+          title: "Failed to subscribe.",
         });
       } else if (data.result === 1) {
         MySwal.fire({
           icon: "success",
-          title: "Success to send message.",
+          title: "Success to subscribe.",
         });
       }
     } catch (e) {
