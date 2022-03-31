@@ -14,7 +14,7 @@ const teams = [
     name: "Vladyslav",
     role: "Smart Contract Developer",
     description:
-      "The brain behind BOMCoin – Tom has 8 Years of experience as a director and CEO in several startups and companies with a strong financial background and proven expertise.",
+      "Vladyslav Mykhalchuk is a seasoned Blockchain Developer who has handled multiple projects for Fintech and other industries that need the power of decentralization, tokenization, and smart contracts.",
   },
   {
     name: "Bishal",

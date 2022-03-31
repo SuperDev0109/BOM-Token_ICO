@@ -11,9 +11,8 @@ export default function PrivateSales() {
         <div className="max-w-760 mx-auto text-center mb-16">
           <h2 className="heading-primary">Private Sales</h2>
           <p className="sub-heading">
-            Our Non-Fungible Tokens will function as the licenses to use BOM.
-            Each company who intends to participate will have to acquire their
-            own NFT.
+            Companies and Individuals can buy BOM tokens and NFTs at discounted
+            price before the coin goes public.
           </p>
         </div>
         <div className="container max-w-1400 grid md:grid-cols-2 grid-cols-1 justify-center md:gap-10 gap-20 mx-auto flex-wrap items-end text-white px-4">
