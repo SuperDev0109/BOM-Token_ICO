@@ -10,6 +10,7 @@ const MySwal = withReactContent(Swal);
 
 const FooterBox = () => {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const onSubscribe = async () => {
     if (!validateEmail(email)) {
@@ -22,10 +23,9 @@ const FooterBox = () => {
     }
 
     try {
-      const { data } = await axios.post(
-        "https://api.bomcoin.com/subscribe",
-        email
-      );
+      setLoading(true);
+      const { data } = await axios.post("/api/subscribe", { email });
+      setLoading(false);
       if (data.result === 0) {
         MySwal.fire({
           icon: "error",
@@ -335,6 +335,7 @@ const FooterBox = () => {
                   <button
                     className="bgGradient h-60 w-60 rounded-full text-black text-20 justify-center items-center absolute top-10px right-10px"
                     onClick={() => onSubscribe()}
+                    disabled={loading}
                   >
                     <FaRegPaperPlane />
                   </button>
