@@ -37,10 +37,8 @@ export default function Pricing() {
         return;
       }
 
-      const { data } = await axios.post(
-        "https://api.bomcoin.com/send_email",
-        contact_data
-      );
+      const { data } = await axios.post("/api/contact", contact_data);
+
       if (data.result === 0) {
         MySwal.fire({
           icon: "error",
