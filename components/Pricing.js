@@ -45,7 +45,7 @@ export default function Pricing() {
                       Total Supply:
                     </h6>
                     <p className="font-rubik text-13 md:text-17 leading-28">
-                      10,000,000 BOM
+                      100,000,000 BOM
                     </p>
                   </li>
                   <li className="p-1 md:p-2 border-b border-white/10">
