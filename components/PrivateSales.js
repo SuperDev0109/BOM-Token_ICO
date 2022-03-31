@@ -24,10 +24,10 @@ export default function PrivateSales() {
                 NFT Sale
               </h3>
               <p className="md:text-20 text-16 md:leading-30 leading-6 mt-1 mb-6">
-                BOM’s world-class team dreamt of an ecosystem that propels
-                businesses forward like nothing before, while highly rewarding
-                investors and contributors throughout the process. We’ll allow
-                countless businesses to benefit.
+                With cryptocurrencies becoming more acceptable, BOM NFTs are the
+                next big evolution in the digital space. With our NFTs,
+                businesses can purchase BOM licenses and reserve the rights to
+                sell to others for profit.
               </p>
               <GetStarted />
             </div>
@@ -39,10 +39,9 @@ export default function PrivateSales() {
                 Token Sale
               </h3>
               <p className="md:text-20 text-16 md:leading-30 leading-6 mt-1 mb-6">
-                BOM’s world-class team dreamt of an ecosystem that propels
-                businesses forward like nothing before, while highly rewarding
-                investors and contributors throughout the process. We’ll allow
-                countless businesses to benefit.
+                BOM tokens are based on the ERC20 standard which allows
+                exchanges with other digital assets. Users can buy and sell
+                these tokens even as the value is expected to rise steadily.
               </p>
               <GetStarted />
             </div>

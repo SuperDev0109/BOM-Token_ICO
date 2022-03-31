@@ -31,16 +31,13 @@ export default function Features() {
               <div className="md:bg-cardbg bg-none md:px-10 py-0 md:py-7 bg-cover flex flex-wrap items-center bg-no-repeat w-full md:gap-0 gap-5">
                 <div className="md:w-1/2 w-full md:text-left text-center">
                   <h3 className="mb-2 md:text-40 text-32 font-bold text-white font-sansation">
-                    Incredible speed, Reasonable and dynamic fees
+                    Incredible speed, Reasonable fees
                   </h3>
                   <p className="md:text-20 text-16 md:leading-30 leading-20">
                     BOM’s state-of-the-art transaction engine is blazingly fast.
                     Thanks to its carefully designed protocol, it processes
                     requests at a speed matched by only the biggest players of
-                    the industry, with more reasonable transaction fees than
-                    most competitors. Also, contrary to most systems, our fees
-                    are flexible: the more your transaction contains, the less
-                    the fee it requires.
+                    the industry, with more reasonable amd flexible fees.
                   </p>
                 </div>
                 <div className="md:w-1/2 w-full md:pl-5 pl-0">

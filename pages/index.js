@@ -20,7 +20,7 @@ function Index() {
       <Header />
       <HomeSlider />
       <About />
-      <AppSection />
+      {/* <AppSection /> */}
       <UniqueNFT />
       <Features />
       <Pricing />
