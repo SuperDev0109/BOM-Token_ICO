@@ -18,8 +18,8 @@ export default function SecureBlockchain() {
               Secure, blockchain-based ecosystem
             </h3>
             <p className="text-20 max-w-500">
-              Built on one of the world’s most robust blockchains, Binance Smart
-              Chain (BSC), BOM is secured by the safety measures trusted by
+              Built on one of the world’s most robust blockchains, Polygon Smart
+              Chain (MATIC), BOM is secured by the safety measures trusted by
               millions globally. This system provides trusted, bulletproof
               security to every BOM participant.
             </p>

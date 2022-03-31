@@ -75,7 +75,7 @@ export default function TokenSale() {
           <div className="range-box w-full mt-7 mb-10">
             <div className="labels flex flex-wrap justify-between">
               <span className="text-16 text-white font-Roboto">0</span>{" "}
-              <span className="text-16 text-white font-Roboto">1.4M</span>
+              <span className="text-16 text-white font-Roboto">4M</span>
             </div>
             <div className="range bg-white h-4 rounded-xl w-full flex"></div>
             <div>
