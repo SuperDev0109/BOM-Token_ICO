@@ -77,7 +77,7 @@ const FooterBox = () => {
         onClick={scrollToTop}
         className={
           visible
-            ? "inline fixed bottom-6 right-6 bg-blMenu hover:bg-black text-white w-50 h-50 rounded-full"
+            ? "inline fixed bottom-24 right-8 bg-blMenu hover:bg-black text-white w-50 h-50 rounded-full"
             : "none"
         }
       >
@@ -345,14 +345,14 @@ const FooterBox = () => {
           <div className="footerBottom lg:border-t lg:border-white/10 lg:pt-10">
             <div className="flex flex-wrap lg:flex-nowrap  justify-center lg:justify-between px-4 mx-0 lg:-mx-4">
               <div className="copyright text-poppins text-center md:text-left">
-                <span className="font-normal">Copyright © 2022</span>{" "}
+                <span className="font-normal">Copyright © 2022</span>
                 <span className="font-bold">
                   . All Rights Reserved by{" "}
                   <a href="#" className="text-wTitle">
                     BOM COIN
                   </a>
                   .
-                </span>{" "}
+                </span>
               </div>
               <div className="lg:block hidden">
                 <SocialIcons />
