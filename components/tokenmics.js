@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 
-const targetTime = new Date("2022-04-01").getTime();
+const targetTime = new Date("2022-05-01").getTime();
 
 export default function TokenSale() {
   const [currentTime, setCurrentTime] = useState(Date.now());
