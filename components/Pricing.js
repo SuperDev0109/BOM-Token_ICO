@@ -28,7 +28,7 @@ export default function Pricing() {
                 </h5>
                 <div className="price-box bg-white/30 rounded-lg p-2 md:p-5 inline-block">
                   <span className="font-rubik text-13 md:text-17">
-                    1 Bomcoin equals:
+                    1 BOM Token equals:
                   </span>
                   <div className="flex flex-row items-center gap-2">
                     <h3 className="font-rubik uppercase line-through">$0.3</h3>
@@ -81,7 +81,7 @@ export default function Pricing() {
                 </h5>
                 <div className="price-box bg-white/30 rounded-lg inline-block p-2 md:p-5">
                   <span className="font-rubik text-13 md:text-17">
-                    1 Bomcoin NFT equals:
+                    1 BOM NFT equals:
                   </span>
                   <h3 className="font-rubik text-20 md:text-35 uppercase font-bold">
                     $300
