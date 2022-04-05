@@ -17,12 +17,12 @@ function SocialIcons() {
           </a>
         </li>
         <li>
-          <a href="https://instagram.com/bomcoinofficial">
+          <a href="https://www.instagram.com/bomcoin_official/">
             <FaInstagram />
           </a>
         </li>
         <li>
-          <a href="https://youtube.com/bomcoinofficial">
+          <a href="https://www.youtube.com/c/BomCoinOfficial">
             <FaYoutube />
           </a>
         </li>
