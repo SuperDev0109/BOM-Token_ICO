@@ -14,7 +14,7 @@ const MySwal = withReactContent(Swal);
 const sitekey = "6LcvQZweAAAAAC-YzRS6ASguX-216umPqLytaVNf";
 const recaptchaRef = createRef();
 
-export default function Pricing() {
+export default function Contact() {
   const {
     register,
     handleSubmit,

@@ -65,7 +65,7 @@ export default function Pricing() {
                     </p>
                   </li>
                 </ul>
-                <BuyNow />
+                <BuyNow kind="token" />
               </div>
             </div>
           </div>
@@ -115,7 +115,7 @@ export default function Pricing() {
                     </p>
                   </li>
                 </ul>
-                <BuyNow />
+                <BuyNow kind="nft" />
               </div>
             </div>
           </div>

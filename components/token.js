@@ -19,7 +19,7 @@ const calcRate = (coin) => {
   return rate;
 };
 
-export default function Buy() {
+export default function Token() {
   const [fromAddress, setFromAddress] = useState("");
   const [toAddress, setToAddress] = useState(
     "0x4C8fb98D57D2eC4b9AED38f169f42386B011c5E3"
@@ -185,68 +185,52 @@ export default function Buy() {
   }, [pay_amount]);
 
   return (
-    <div className="font-sans antialiased bg-grey-lightest">
-      <div className="w-full bg-grey-lightest">
-        <div className="container mx-auto py-8">
-          <div className="w-5/6 lg:w-1/2 mx-auto rounded shadow">
-            <MetaMaskConnect onChange={addressChanged} />
-            <div>ethereum balance:{ethBalance}</div>
-            <div>usdt balance:{usdtBalance}</div>
-            <div className="py-4 px-8 text-white text-4xl font-bold text-center">
-              Buy
-            </div>
-            <div className="flex flex-col gap-4">
-              <DropDown
-                data={coins}
-                value={current_coin}
-                setValue={setCurrentCoin}
-              />
-              <div className="field-input">
-                <input
-                  className="w-full text-20 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
-                  type="number"
-                  min={0}
-                  value={pay_amount}
-                  onChange={(e) => {
-                    setPayAmount(e.target.value);
-                  }}
-                />
-              </div>
-            </div>
-            <div className="flex flex-col gap-4">
-              <div>BOM</div>
-              <div className="field-input">
-                <input
-                  className="w-full text-20 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
-                  type="number"
-                  min={0}
-                  value={buy_amount}
-                  onChange={(e) => {
-                    setBuyAmount(e.target.value);
-                  }}
-                />
-              </div>
-            </div>
-            <div className="flex flex-row justify-between">
-              <div>Rate</div>
-              <div>{rate} USDT per 1 BOM</div>
-            </div>
-            <div className="grid-cols-1 grid gap-4 mt-4">
-              <button
-                className="btn-primary w-full"
-                onClick={() => metaMaskPay(0)}
-              >
-                Ether Pay
-              </button>
-              <button
-                className="btn-primary w-full"
-                onClick={() => metaMaskPay(1)}
-              >
-                Token Pay
-              </button>
-            </div>
-          </div>
+    <div className="">
+      <MetaMaskConnect onChange={addressChanged} />
+      <div>ethereum balance:{ethBalance}</div>
+      <div>usdt balance:{usdtBalance}</div>
+      <div className="py-4 px-8 text-white text-4xl font-bold text-center">
+        Buy
+      </div>
+      <div className="flex flex-col gap-4">
+        <DropDown data={coins} value={current_coin} setValue={setCurrentCoin} />
+        <div className="field-input">
+          <input
+            className="w-full text-20 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
+            type="number"
+            min={0}
+            value={pay_amount}
+            onChange={(e) => {
+              setPayAmount(e.target.value);
+            }}
+          />
         </div>
+      </div>
+      <div className="flex flex-col gap-4">
+        <div>BOM</div>
+        <div className="field-input">
+          <input
+            className="w-full text-20 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
+            type="number"
+            min={0}
+            value={buy_amount}
+            onChange={(e) => {
+              setBuyAmount(e.target.value);
+            }}
+          />
+        </div>
+      </div>
+      <div className="flex flex-row justify-between">
+        <div>Rate</div>
+        <div>{rate} USDT per 1 BOM</div>
+      </div>
+      <div className="grid-cols-1 grid gap-4 mt-4">
+        <button className="btn-primary w-full" onClick={() => metaMaskPay(0)}>
+          Ether Pay
+        </button>
+        <button className="btn-primary w-full" onClick={() => metaMaskPay(1)}>
+          Token Pay
+        </button>
       </div>
     </div>
   );

@@ -13,6 +13,7 @@
     "@hookform/resolvers": "^2.8.8",
     "axios": "^0.26.0",
     "ethereumjs-tx": "^2.1.2",
+    "ipfs-http-client": "^56.0.1",
     "moment": "^2.29.1",
     "mongodb": "^4.4.1",
     "next": "^12.1.0",

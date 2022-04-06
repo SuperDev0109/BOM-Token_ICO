@@ -8,7 +8,7 @@ import { validateEmail } from "../util";
 
 const MySwal = withReactContent(Swal);
 
-const FooterBox = () => {
+const Footer = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -366,4 +366,4 @@ const FooterBox = () => {
   );
 };
 
-export default FooterBox;
+export default Footer;

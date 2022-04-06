@@ -6,6 +6,9 @@ import {
   FaPaperPlane,
   FaTwitter,
   FaDiscord,
+  FaMedium,
+  FaTelegram,
+  FaDochub,
 } from "react-icons/fa";
 function SocialIcons() {
   return (
@@ -17,7 +20,7 @@ function SocialIcons() {
           </a>
         </li>
         <li>
-          <a href="https://www.instagram.com/bomcoin_official/">
+          <a href="https://www.instagram.com/BomCoinOfficial">
             <FaInstagram />
           </a>
         </li>
@@ -33,12 +36,22 @@ function SocialIcons() {
         </li>
         <li>
           <a href="https://t.me/bomcoinofficial">
-            <FaPaperPlane />
+            <FaTelegram />
           </a>
         </li>
         <li>
           <a href="https://twitter.com/bomcoinofficial">
             <FaTwitter />
+          </a>
+        </li>
+        <li>
+          <a href="https://bomcoin.medium.com">
+            <FaMedium />
+          </a>
+        </li>
+        <li>
+          <a href="https://docs.bomcoin.com">
+            <FaDochub />
           </a>
         </li>
       </ul>
