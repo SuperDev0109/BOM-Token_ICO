@@ -10,16 +10,21 @@ import { WalletLinkConnector } from "@web3-react/walletlink-connector";
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { useWeb3React } from "@web3-react/core";
 
-const Injected = new InjectedConnector({
-  supportedChainIds: [1, 3, 4, 5, 42],
-});
+const rpcUrl = `https://polygon-mumbai.infura.io/v3/a57b980756b843539f4a23218a686291`;
+
+const toHex = (num) => {
+  const val = Number(num);
+  return "0x" + val.toString(16);
+};
+
+const Injected = new InjectedConnector({});
 const CoinbaseWallet = new WalletLinkConnector({
-  url: `https://polygon-mumbai.infura.io/v3/a57b980756b843539f4a23218a686291`,
-  appName: "Web3-react Demo",
+  url: rpcUrl,
+  appName: "BOMCoin",
   supportedChainIds: [1, 3, 4, 5, 42],
 });
 const WalletConnect = new WalletConnectConnector({
-  rpcUrl: `https://polygon-mumbai.infura.io/v3/a57b980756b843539f4a23218a686291`,
+  rpcUrl,
   bridge: "https://bridge.walletconnect.org",
   qrcode: true,
 });
@@ -63,8 +68,43 @@ export default function Header() {
     setIsOpen(true);
   }
 
-  const { active, activate, deactivate, library, chainId, account } =
+  const { active, account, activate, deactivate, library, chainId } =
     useWeb3React();
+
+  const switchToPolygon = async () => {
+    try {
+      await library.provider.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: toHex(80001) }],
+      });
+    } catch (switchError) {
+      if (switchError.code === 4902) {
+        try {
+          await library.provider.request({
+            method: "wallet_addEthereumChain",
+            params: [
+              {
+                chainId: toHex(80001),
+                rpcUrls: [rpcUrl],
+                chainName: "Polygon Testnet 4 Bom",
+                nativeCurrency: { name: "BOMT", decimals: 18, symbol: "BOMT" },
+                iconUrls: ["https://bomcoin.com/images/logo.png"],
+              },
+            ],
+          });
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (active && library) {
+      console.log("Switching to Polygon...");
+      switchToPolygon();
+    }
+  }, [active, library]);
 
   return (
     <>
