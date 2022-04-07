@@ -1,8 +1,28 @@
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
-import { useState, useEffect } from "react";
+import { Fragment, useState, useEffect } from "react";
 import Button from "./Button";
 import { useRouter } from "next/router";
+import { Dialog, Transition } from "@headlessui/react";
+
+import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
+import { WalletLinkConnector } from "@web3-react/walletlink-connector";
+import { InjectedConnector } from "@web3-react/injected-connector";
+import { useWeb3React } from "@web3-react/core";
+
+const Injected = new InjectedConnector({
+  supportedChainIds: [1, 3, 4, 5, 42],
+});
+const CoinbaseWallet = new WalletLinkConnector({
+  url: `https://polygon-mumbai.infura.io/v3/a57b980756b843539f4a23218a686291`,
+  appName: "Web3-react Demo",
+  supportedChainIds: [1, 3, 4, 5, 42],
+});
+const WalletConnect = new WalletConnectConnector({
+  rpcUrl: `https://polygon-mumbai.infura.io/v3/a57b980756b843539f4a23218a686291`,
+  bridge: "https://bridge.walletconnect.org",
+  qrcode: true,
+});
 
 const navigation = [
   { name: "Home", href: "#", current: true },
@@ -33,8 +53,92 @@ export default function Header() {
     }
   }, []);
   const [selectedNav, setSelectedNav] = useState(0);
+  let [isOpen, setIsOpen] = useState(false);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  const { active, activate, deactivate, library, chainId, account } =
+    useWeb3React();
+
   return (
     <>
+      <Transition appear show={isOpen} as={Fragment}>
+        <Dialog
+          as="div"
+          className="fixed inset-0 z-10 overflow-y-auto"
+          onClose={closeModal}
+        >
+          <div className="min-h-screen px-4 text-center">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Dialog.Overlay className="fixed inset-0" />
+            </Transition.Child>
+            <span
+              className="inline-block h-screen align-middle"
+              aria-hidden="true"
+            >
+              &#8203;
+            </span>
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+              <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                <Dialog.Title
+                  as="h3"
+                  className="text-lg font-medium leading-6 text-gray-900"
+                >
+                  Connect Wallet
+                </Dialog.Title>
+                <div className="flex flex-col gap-2 mt-4">
+                  <button
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={() => {
+                      activate(Injected);
+                    }}
+                  >
+                    MetaMask
+                  </button>
+                  <button
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={() => {
+                      activate(CoinbaseWallet);
+                    }}
+                  >
+                    CoinbaseWallet
+                  </button>
+                  <button
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={() => {
+                      activate(WalletConnect);
+                    }}
+                  >
+                    WalletConnect
+                  </button>
+                </div>
+              </div>
+            </Transition.Child>
+          </div>
+        </Dialog>
+      </Transition>
       <div className="min-h-full">
         <Disclosure
           as="nav"
@@ -112,6 +216,12 @@ export default function Header() {
                         title="Contact Us"
                         onClick={() => {
                           router.push("/contact");
+                        }}
+                      />
+                      <Button
+                        title="Connect Wallet"
+                        onClick={() => {
+                          setIsOpen(true);
                         }}
                       />
                     </div>

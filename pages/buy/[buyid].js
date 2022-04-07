@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Tab } from "@headlessui/react";
 import Token from "../../components/token";
 import NFT from "../../components/nft";
