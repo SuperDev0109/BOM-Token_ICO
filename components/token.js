@@ -4,6 +4,8 @@ import DropDown from "../components/DropDown";
 import Web3 from "web3";
 import { tokenAddresses } from "../config/tokens";
 import { tokenABI } from "../config/token_abis";
+import { useWeb3React } from "@web3-react/core";
+import { useBalance, useBlockNumber } from "../hooks";
 
 const coins = ["USDC", "USDT", "MATIC"];
 
@@ -20,37 +22,20 @@ const calcRate = (coin) => {
 };
 
 export default function Token() {
+  const { active, account, activate, deactivate, library, chainId } =
+    useWeb3React();
+
+  const balance = useBalance();
+  const blockNumber = useBlockNumber();
+
   const [fromAddress, setFromAddress] = useState("");
-  const [toAddress, setToAddress] = useState(
-    "0x4C8fb98D57D2eC4b9AED38f169f42386B011c5E3"
-  );
-  const [sign, setSign] = useState("");
+  const [toAddress, setToAddress] = useState("");
   const [web3, setWeb3] = useState();
-
-  const [ethBalance, setEthBalance] = useState(0);
-  const [usdtBalance, setUsdtBalance] = useState(0);
-
-  const addressChanged = useCallback((address, sign) => {
-    setFromAddress(address);
-    setSign(sign);
-  }, []);
 
   const [pay_amount, setPayAmount] = useState(0);
   const [buy_amount, setBuyAmount] = useState(0);
   const [current_coin, setCurrentCoin] = useState(coins[0]);
   const [rate, setRate] = useState(1);
-
-  const convertGwei2Eth = (gwei) => gwei / Math.pow(10, 18);
-
-  const handleGetEthBalanceWithMetamask = async () => {
-    const balance = await window.ethereum.request({
-      method: "eth_getBalance",
-      params: [fromAddress, "latest"],
-    });
-    const wei = parseInt(balance, 16);
-    const eth = wei / Math.pow(10, 18);
-    setEthBalance(eth);
-  };
 
   const handleGetTokenBalance = async (token_id) => {
     const eth_balance = await web3.eth.getBalance(fromAddress);
@@ -91,32 +76,6 @@ export default function Token() {
     token_id -= 1;
 
     return;
-  };
-
-  const convertFloat2Hex = (amount) => {
-    const amountHex = (amount * Math.pow(10, 18)).toString(16);
-    return amountHex;
-  };
-
-  const etherSendWithMetamask = async () => {
-    const hexAmount = convertFloat2Hex(pay_amount);
-    try {
-      const params = [
-        {
-          from: fromAddress,
-          to: toAddress,
-          gas: "0x76c0",
-          value: hexAmount,
-        },
-      ];
-      const transactionHash = await ethereum.request({
-        method: "eth_sendTransaction",
-        params,
-      });
-      console.log("send result:", transactionHash);
-    } catch (error) {
-      console.error("send exception:", error);
-    }
   };
 
   const metaMaskPay = async (token_id) => {
@@ -186,12 +145,35 @@ export default function Token() {
 
   return (
     <div className="">
-      <MetaMaskConnect onChange={addressChanged} />
-      <div>ethereum balance:{ethBalance}</div>
-      <div>usdt balance:{usdtBalance}</div>
-      <div className="py-4 px-8 text-white text-4xl font-bold text-center">
-        Buy
-      </div>
+      {active && (
+        <div className="flex flex-col gap-2 my-4">
+          <div className="flex flex-row gap-4">
+            <div>BlockNumber:</div>
+            <div>{blockNumber}</div>
+          </div>
+          <div className="flex flex-row gap-4">
+            <div>Account:</div>
+            <div>{account}</div>
+          </div>
+          <div className="flex flex-row gap-4">
+            <div>Balance:</div>
+            <div>{balance}</div>
+          </div>
+          <button
+            className="h-10 px-5 border border-gray-400 rounded-md"
+            onClick={async () => {
+              const message = `Logging in at ${new Date().toISOString()}`;
+              const signature = await library
+                .getSigner(account)
+                .signMessage(message)
+                .catch((error) => console.error(error));
+              console.log({ message, account, signature });
+            }}
+          >
+            Sign In
+          </button>
+        </div>
+      )}
       <div className="flex flex-col gap-4">
         <DropDown data={coins} value={current_coin} setValue={setCurrentCoin} />
         <div className="field-input">
@@ -227,9 +209,6 @@ export default function Token() {
       <div className="grid-cols-1 grid gap-4 mt-4">
         <button className="btn-primary w-full" onClick={() => metaMaskPay(0)}>
           Ether Pay
-        </button>
-        <button className="btn-primary w-full" onClick={() => metaMaskPay(1)}>
-          Token Pay
         </button>
       </div>
     </div>
