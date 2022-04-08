@@ -99,6 +99,20 @@ export default function Header() {
     }
   };
 
+  const signin = async () => {
+    const message = `Logging in at ${new Date().toISOString()}`;
+    await library
+      .getSigner(account)
+      .signMessage(message)
+      .catch((error) => console.error(error));
+  };
+
+  useEffect(() => {
+    if (active) {
+      signin();
+    }
+  }, [active]);
+
   useEffect(() => {
     if (active && library) {
       console.log("Switching to Polygon...");
@@ -153,6 +167,7 @@ export default function Header() {
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     onClick={() => {
                       activate(Injected);
+                      setIsOpen(false);
                     }}
                   >
                     MetaMask
@@ -161,6 +176,7 @@ export default function Header() {
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     onClick={() => {
                       activate(CoinbaseWallet);
+                      setIsOpen(false);
                     }}
                   >
                     CoinbaseWallet
@@ -169,6 +185,7 @@ export default function Header() {
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     onClick={() => {
                       activate(WalletConnect);
+                      setIsOpen(false);
                     }}
                   >
                     WalletConnect
@@ -258,12 +275,22 @@ export default function Header() {
                           router.push("/contact");
                         }}
                       />
-                      <Button
-                        title="Connect Wallet"
-                        onClick={() => {
-                          setIsOpen(true);
-                        }}
-                      />
+                      {!active && (
+                        <Button
+                          title="Connect Wallet"
+                          onClick={() => {
+                            setIsOpen(true);
+                          }}
+                        />
+                      )}
+                      {active && (
+                        <Button
+                          title="Disconnect Wallet"
+                          onClick={() => {
+                            deactivate();
+                          }}
+                        />
+                      )}
                     </div>
                   </div>
                   <div className="-mr-2 flex md:hidden">

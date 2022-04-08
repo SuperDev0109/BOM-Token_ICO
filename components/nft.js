@@ -1,4 +1,4 @@
-import React, { createRef, useState } from "react";
+import React, { createRef, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import axios from "axios";
@@ -67,22 +67,36 @@ export default function NFT() {
     }
   };
 
+  const attachRef = useRef();
+
+  const selectImage = () => {
+    console.log("attachRef:", attachRef);
+    if (attachRef && attachRef.current) {
+      attachRef.current.click();
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="grid-cols-1 grid gap-4 mt-4">
         <div className="field-input">
-          <img className="inset-0 w-full h-32" src={preview} />
+          <img
+            className="inset-0 w-full h-32"
+            src={preview}
+            onClick={selectImage}
+          />
           <input
-            className="opacity-0"
+            ref={attachRef}
+            className=""
             accept="image/*"
             type="file"
             id="image"
             name="image"
             placeholder="Image"
-            onChange={showPreview}
             {...register("image", {
               required: "Image is required.",
             })}
+            onChange={showPreview}
           />
           <ErrorMessage
             errors={errors}
@@ -145,7 +159,6 @@ export default function NFT() {
             }
           />
         </div>
-
         <div className="field-input">
           <textarea
             className="w-full text-20 p-2 h-198 font-poppins bg-white/20 text-white rounded-md"

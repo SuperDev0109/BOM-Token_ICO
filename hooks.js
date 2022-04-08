@@ -25,7 +25,11 @@ export function useBlockNumber() {
       library.on("block", updateBlockNumber);
 
       return () => {
-        library.removeEventListener("block", updateBlockNumber);
+        try {
+          library.removeEventListener("block", updateBlockNumber);
+        } catch (e) {
+          console.error(e);
+        }
       };
     }
   }, [library]);

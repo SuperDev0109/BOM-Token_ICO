@@ -29,7 +29,7 @@ export default function Buy() {
     <>
       <Header />
       <div className="mt-40 flex">
-        <div className="mx-auto w-full md:w-3/4 lg:w-1/2">
+        <div className="mx-auto w-full md:w-1/2 lg:w-1/3">
           <Tab.Group
             selectedIndex={selectedIndex}
             onChange={(i) => setSelectedIndex(i)}
