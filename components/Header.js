@@ -9,6 +9,9 @@ import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
 import { WalletLinkConnector } from "@web3-react/walletlink-connector";
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { useWeb3React } from "@web3-react/core";
+import MetaMask from "./Metamask";
+import CoinbasewalletIcon from "./CoinbasewalletIcon";
+import WalletconnectIcon from "./WalletConnectIcon";
 
 const rpcUrl = `https://polygon-mumbai.infura.io/v3/a57b980756b843539f4a23218a686291`;
 
@@ -138,7 +141,7 @@ export default function Header() {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Dialog.Overlay className="fixed inset-0" />
+              <Dialog.Overlay className="fixed inset-0 bg-white opacity-90" />
             </Transition.Child>
             <span
               className="inline-block h-screen align-middle"
@@ -155,39 +158,42 @@ export default function Header() {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+              <div className="inline-block w-full max-w-md p-0 my-8 overflow-hidden text-left align-middle transition-all transform shadow-xl rounded-40 bg-blue-900/100">
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900"
+                  className="text-lg font-medium leading-6 text-white p-6 text-center bg-white/20"
                 >
                   Connect Wallet
                 </Dialog.Title>
-                <div className="flex flex-col gap-2 mt-4">
+                <div className="grid grid-cols-2 p-6 gap-6 mt-0 bg-white">
                   <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    className="text-blue-500 font-bold py-2 px-4 rounded flex flex-col justify-center items-center gap-2"
                     onClick={() => {
                       activate(Injected);
                       setIsOpen(false);
                     }}
                   >
+                    <MetaMask />
                     MetaMask
                   </button>
                   <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    className="text-blue-500 font-bold py-2 px-4 rounded flex flex-col justify-center items-center gap-2"
                     onClick={() => {
                       activate(CoinbaseWallet);
                       setIsOpen(false);
                     }}
                   >
+                    <CoinbasewalletIcon />
                     CoinbaseWallet
                   </button>
                   <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    className="text-blue-500 font-bold py-2 px-4 rounded flex flex-col justify-center items-center gap-2"
                     onClick={() => {
                       activate(WalletConnect);
                       setIsOpen(false);
                     }}
                   >
+                    <WalletconnectIcon />
                     WalletConnect
                   </button>
                 </div>

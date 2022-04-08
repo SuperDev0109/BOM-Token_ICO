@@ -9,6 +9,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { validateEmail } from "../util";
 import { create } from "ipfs-http-client";
+import {FaUserCircle} from "react-icons/fa";
 
 const MySwal = withReactContent(Swal);
 const client = create("https://ipfs.infura.io:5001/api/v0");
@@ -78,16 +79,18 @@ export default function NFT() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="grid-cols-1 grid gap-4 mt-4">
-        <div className="field-input">
+      <div className="grid-cols-1 grid gap-4 mt-0">
+        <div className="field-input relative flex justify-center items-center h-100px rounded-md">
           <img
-            className="inset-0 w-full h-32"
+            className="inset-0 w-full h-32 hidden"
             src={preview}
             onClick={selectImage}
           />
+           <FaUserCircle />
+          
           <input
             ref={attachRef}
-            className=""
+            className="absolute top-0 right-0 left-0 bottom-0 opacity-0 cursor-pointer"
             accept="image/*"
             type="file"
             id="image"
@@ -113,7 +116,7 @@ export default function NFT() {
         </div>
         <div className="field-input">
           <input
-            className="w-full text-20 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
+            className="w-full text-16 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
             type="text"
             id="name"
             name="name"
@@ -137,7 +140,7 @@ export default function NFT() {
         </div>
         <div className="field-input">
           <input
-            className="w-full text-20 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
+            className="w-full text-16 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
             type="text"
             id="link"
             name="link"
@@ -161,7 +164,7 @@ export default function NFT() {
         </div>
         <div className="field-input">
           <textarea
-            className="w-full text-20 p-2 h-198 font-poppins bg-white/20 text-white rounded-md"
+            className="w-full text-16 p-2 px-4 h-[150px] font-poppins bg-white/20 text-white rounded-md"
             id="description"
             name="description"
             placeholder="Description"
@@ -184,7 +187,7 @@ export default function NFT() {
         </div>
         <div className="field-input">
           <input
-            className="w-full text-20 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
+            className="w-full text-16 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
             type="text"
             id="supply"
             name="supply"

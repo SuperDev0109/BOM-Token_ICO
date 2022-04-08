@@ -143,9 +143,9 @@ export default function Token() {
   }, [pay_amount]);
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-4">
       <div className="flex flex-col">
-        <div className="flex flex-row justify-between items-center mb-1">
+        <div className="flex flex-row justify-between items-center mb-4">
           <DropDown
             data={coins}
             value={current_coin}

@@ -78,7 +78,7 @@ const Footer = () => {
         className={
           visible
             ? "inline fixed bottom-24 right-8 bg-blMenu hover:bg-black text-white w-50 h-50 rounded-full"
-            : "none"
+            : "hidden"
         }
       >
         <FaArrowUp />
