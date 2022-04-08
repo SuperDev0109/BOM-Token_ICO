@@ -43,7 +43,7 @@
     "lint": "next lint",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 4000"
+    "start": "next start"
   },
   "devDependencies": {
     "@types/node": "^17.0.23",
