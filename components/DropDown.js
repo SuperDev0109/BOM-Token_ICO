@@ -11,7 +11,7 @@ export default function DropDown({ data, value, setValue }) {
         type="button"
         onClick={(_) => setOpen(!open)}
       >
-        {value}
+        {value.symbol}
         <svg
           className="ml-2 w-4 h-4"
           fill="none"
@@ -42,7 +42,7 @@ export default function DropDown({ data, value, setValue }) {
                   item === value ? "bg-gray-200" : ""
                 }`}
               >
-                {item}
+                {item.symbol}
               </a>
             </li>
           ))}
