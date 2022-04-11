@@ -54,7 +54,7 @@ export default function Buy() {
             </Tab.List>
             <Tab.Panels className="mt-6 max-w-400 mx-auto">
               <Tab.Panel
-                key={"Token"}
+                key={"Token"} 
                 className={classNames(
                   "rounded-xl p-6",
                   "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60 border border-1 border-white bg-blue-900/20"
