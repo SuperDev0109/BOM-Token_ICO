@@ -11,7 +11,7 @@ import { InjectedConnector } from "@web3-react/injected-connector";
 import { useWeb3React } from "@web3-react/core";
 import MetaMask from "./Metamask";
 import CoinbasewalletIcon from "./CoinbasewalletIcon";
-import WalletconnectIcon from "./WalletConnectIcon";
+// import WalletconnectIcon from "./WalletConnectIcon";
 
 const rpcUrl = `https://polygon-mumbai.infura.io/v3/a57b980756b843539f4a23218a686291`;
 
@@ -193,7 +193,7 @@ export default function Header() {
                       setIsOpen(false);
                     }}
                   >
-                    <WalletconnectIcon />
+                    {/* <WalletconnectIcon /> */}
                     WalletConnect
                   </button>
                 </div>
