@@ -179,5 +179,6 @@ height: 11px;
   transform: rotate(45deg);
 }
 .field-input svg {
-  @apply w-150 h-90;
+  @apply absolute w-full left-0 h-[70px];
+  z-index: -1;
 }

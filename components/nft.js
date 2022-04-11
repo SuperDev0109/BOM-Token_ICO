@@ -82,7 +82,7 @@ export default function NFT() {
       <div className="grid-cols-1 grid gap-4 mt-0">
         <div className="field-input relative flex justify-center items-center h-100px rounded-md">
           <img
-            className="inset-0 w-full h-32 hidden"
+            className=" w-full h-full object-contain absolute top-0 left-0 z-100"
             src={preview}
             onClick={selectImage}
           />
@@ -99,7 +99,7 @@ export default function NFT() {
             {...register("image", {
               required: "Image is required.",
             })}
-            onChange={showPreview}
+            onChange={showPreview} 
           />
           <ErrorMessage
             errors={errors}
