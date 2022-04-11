@@ -5,7 +5,7 @@ import Web3 from "web3";
 import { tokenAddresses } from "../config/tokens";
 import { tokenABI } from "../config/token_abis";
 import { useWeb3React } from "@web3-react/core";
-import { useBalance, useBlockNumber } from "../hooks";
+import { useBalance } from "../hooks";
 import TokenListRinkeby from "../assets/token-list-rinkeby.json";
 
 const calcRate = (coin) => {
@@ -26,8 +26,7 @@ export default function Token() {
   const { active, account, activate, deactivate, library, chainId } =
     useWeb3React();
 
-  const balance = useBalance(selectedToken.address, selectedToken.decimals);
-  const blockNumber = useBlockNumber();
+  const [balance] = useBalance(selectedToken.address, selectedToken.decimals);
 
   const [fromAddress, setFromAddress] = useState("");
   const [web3, setWeb3] = useState();

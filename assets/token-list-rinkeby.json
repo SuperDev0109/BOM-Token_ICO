@@ -16,5 +16,17 @@
     "address": "0x3B00Ef435fA4FcFF5C209a37d1f3dcff37c705aD",
     "symbol": "USDT",
     "decimals": 6
+  },
+  {
+    "name": "Tether test token",
+    "address": "0xD92E713d051C37EbB2561803a3b5FBAbc4962431",
+    "symbol": "TUSDT",
+    "decimals": 6
+  },
+  {
+    "name": "Ethereum",
+    "address": "0x0000000000000000000000000000000000000000",
+    "symbol": "ETH",
+    "decimals": 18
   }
 ]

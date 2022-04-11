@@ -2,11 +2,11 @@ import "../styles/globals.css";
 import "../styles/index.css";
 import "../styles/home.css";
 import { useEffect } from "react";
-import { Web3Provider } from "@ethersproject/providers";
 import { Web3ReactProvider } from "@web3-react/core";
+import Web3 from "web3";
 
 function getLibrary(provider) {
-  return new Web3Provider(provider);
+  return new Web3(provider);
 }
 
 function MyApp({ Component, pageProps }) {

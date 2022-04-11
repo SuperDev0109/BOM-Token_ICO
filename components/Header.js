@@ -35,11 +35,10 @@ const WalletConnect = new WalletConnectConnector({
 const navigation = [
   { name: "Home", href: "#", current: true },
   { name: "About", href: "#", current: false },
-  { name: "Services", href: "#", current: false },
   { name: "Features", href: "#", current: false },
   { name: "Roadmap", href: "#", current: false },
-  { name: "Tokenmics", href: "#", current: false },
-  { name: "FAQ", href: "#", current: false },
+  { name: "Swap", href: "#", current: false },
+  { name: "Contact Us", href: "#", current: false },
 ];
 
 export default function Header() {
@@ -76,14 +75,15 @@ export default function Header() {
 
   const switchToPolygon = async () => {
     try {
-      await library.provider.request({
+      await library._provider.request({
         method: "wallet_switchEthereumChain",
         params: [{ chainId: toHex(80001) }],
       });
     } catch (switchError) {
+      console.error("switchError:", switchError);
       if (switchError.code === 4902) {
         try {
-          await library.provider.request({
+          await library._provider.request({
             method: "wallet_addEthereumChain",
             params: [
               {
@@ -112,13 +112,13 @@ export default function Header() {
 
   useEffect(() => {
     if (active) {
-      signin();
+      // signin();
     }
   }, [active]);
 
   useEffect(() => {
+    console.log("library:", library);
     if (active && library) {
-      console.log("Switching to Polygon...");
       switchToPolygon();
     }
   }, [active, library]);
@@ -255,6 +255,14 @@ export default function Header() {
                                   : "text-white hover:text-blMenu"
                               }`}
                               onClick={(e) => {
+                                if (item.name === "Contact Us") {
+                                  router.push("/contact");
+                                  return;
+                                }
+                                if (item.name === "Swap") {
+                                  router.push("/buy/bom-token");
+                                  return;
+                                }
                                 if (router.pathname === "/") {
                                   setSelectedNav(index);
                                   let hero = document.getElementById(item.name);
@@ -275,12 +283,6 @@ export default function Header() {
                           ))}
                         </div>
                       </div>
-                      <Button
-                        title="Contact Us"
-                        onClick={() => {
-                          router.push("/contact");
-                        }}
-                      />
                       {!active && (
                         <Button
                           title="Connect Wallet"
