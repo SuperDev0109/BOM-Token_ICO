@@ -1,0 +1,20 @@
+[
+  {
+    "name": "MATIC",
+    "address": "0x83e556Da6514325eE615FF868cd0d324856fa0Cf",
+    "symbol": "MATIC",
+    "decimals": 18
+  },
+  {
+    "name": "USD Coin",
+    "address": "0xeb8f08a975Ab53E34D8a0330E0D34de942C95926",
+    "symbol": "USDC",
+    "decimals": 6
+  },
+  {
+    "name": "Tether USD",
+    "address": "0x3B00Ef435fA4FcFF5C209a37d1f3dcff37c705aD",
+    "symbol": "USDT",
+    "decimals": 6
+  }
+]

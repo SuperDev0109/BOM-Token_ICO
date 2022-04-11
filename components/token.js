@@ -6,15 +6,14 @@ import { tokenAddresses } from "../config/tokens";
 import { tokenABI } from "../config/token_abis";
 import { useWeb3React } from "@web3-react/core";
 import { useBalance, useBlockNumber } from "../hooks";
-
-const coins = ["MATIC", "USDC", "USDT"];
+import TokenListRinkeby from "../assets/token-list-rinkeby.json";
 
 const calcRate = (coin) => {
   let rate = 1;
 
-  if (coin === "USDC" || coin === "USDT") {
+  if (coin.symbol === "USDC" || coin.symbol === "USDT") {
     rate = 0.3;
-  } else if (coin === "MATIC") {
+  } else if (coin.symbol === "MATIC") {
     rate = 0.5;
   }
 
@@ -22,10 +21,12 @@ const calcRate = (coin) => {
 };
 
 export default function Token() {
+  const [selectedToken, setSelectedToken] = useState(TokenListRinkeby[0]);
+
   const { active, account, activate, deactivate, library, chainId } =
     useWeb3React();
 
-  const balance = useBalance();
+  const balance = useBalance(selectedToken.address, selectedToken.decimals);
   const blockNumber = useBlockNumber();
 
   const [fromAddress, setFromAddress] = useState("");
@@ -33,7 +34,6 @@ export default function Token() {
 
   const [pay_amount, setPayAmount] = useState(0);
   const [buy_amount, setBuyAmount] = useState(0);
-  const [current_coin, setCurrentCoin] = useState(coins[0]);
   const [rate, setRate] = useState(1);
 
   const handleGetTokenBalance = async (token_id) => {
@@ -127,8 +127,8 @@ export default function Token() {
   }, []);
 
   useEffect(() => {
-    setRate(calcRate(current_coin));
-  }, [current_coin]);
+    setRate(calcRate(selectedToken));
+  }, [selectedToken]);
 
   useEffect(() => {
     if (buy_amount * 100 * rate !== pay_amount * 100) {
@@ -147,9 +147,9 @@ export default function Token() {
       <div className="flex flex-col">
         <div className="flex flex-row justify-between items-center mb-4">
           <DropDown
-            data={coins}
-            value={current_coin}
-            setValue={setCurrentCoin}
+            data={TokenListRinkeby}
+            value={selectedToken}
+            setValue={setSelectedToken}
           />
           <div className="">{balance}</div>
         </div>
