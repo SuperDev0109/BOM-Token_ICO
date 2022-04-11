@@ -34,7 +34,7 @@ export default function Buy() {
             selectedIndex={selectedIndex}
             onChange={(i) => setSelectedIndex(i)}
           >
-            <Tab.List className="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
+            <Tab.List className="flex p-1 space-x-1 bg-blue-900/20 rounded-xl max-w-400 mx-auto">
               {categories.map((category) => (
                 <Tab
                   key={category}
