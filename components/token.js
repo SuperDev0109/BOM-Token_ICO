@@ -153,18 +153,21 @@ export default function Token() {
           />
           <div className="">{balance}</div>
         </div>
-        <div className="field-input">
-          <input
-            className="w-full text-20 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
-            type="number"
-            min={0}
-            value={pay_amount}
-            onChange={(e) => {
-              setPayAmount(e.target.value);
-            }}
-          />
-        </div>
       </div>
+      <div className="flex flex-col">
+        <div>BALANCE</div>
+        <div className="field-input">
+            <input
+              className="w-full text-20 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
+              type="number"
+              min={0}
+              value={pay_amount}
+              onChange={(e) => {
+                setPayAmount(e.target.value);
+              }}
+            />
+          </div>
+        </div>
       <div className="flex flex-col">
         <div>BOM</div>
         <div className="field-input">
