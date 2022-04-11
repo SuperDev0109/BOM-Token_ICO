@@ -188,7 +188,7 @@ export default function Token() {
       </div>
       <div className="grid-cols-1 grid gap-4 mt-4">
         <button className="btn-primary w-full" onClick={() => metaMaskPay(0)}>
-          Pay
+          Swap
         </button>
       </div>
     </div>

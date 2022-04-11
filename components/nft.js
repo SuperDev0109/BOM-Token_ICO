@@ -221,7 +221,7 @@ export default function NFT() {
                 Creating
               </>
             )}
-            {!isSubmitting && <>Create</>}
+            {!isSubmitting && <>Mint</>}
           </button>
         </div>
       </div>
