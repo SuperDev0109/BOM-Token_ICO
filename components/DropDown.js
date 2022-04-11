@@ -3,14 +3,15 @@ import React, { useState } from "react";
 export default function DropDown({ data, value, setValue }) {
   const [open, setOpen] = useState(false);
   return (
-    <div>
+    <div className="w-[200px]">
       <button
         id="dropdownDividerButton"
         data-dropdown-toggle="dropdownDivider"
-        className="text-white w-24 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        className="text-white gap-x-[5px] w-[120px] bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         type="button"
         onClick={(_) => setOpen(!open)}
       >
+        <img src={"/images/matic_logo.png"} className="w-[20px]" />
         {value.symbol}
         <svg
           className="ml-2 w-4 h-4"
@@ -23,7 +24,7 @@ export default function DropDown({ data, value, setValue }) {
         </svg>
       </button>
       <div
-        className={`absolute z-10 w-24 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 ${
+        className={`absolute z-10 w-[120px] bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 ${
           open ? "" : "hidden"
         }`}
       >
@@ -38,10 +39,11 @@ export default function DropDown({ data, value, setValue }) {
                   setValue(item);
                   setOpen(false);
                 }}
-                className={`block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
+                className={`flex items-center gap-x-[10px] py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
                   item === value ? "bg-gray-200" : ""
                 }`}
               >
+                <img src={"/images/matic_logo.png"} className="w-[20px]" />
                 {item.symbol}
               </a>
             </li>

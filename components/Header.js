@@ -141,7 +141,7 @@ export default function Header() {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Dialog.Overlay className="fixed inset-0 bg-white opacity-90" />
+              <Dialog.Overlay className="fixed inset-0 bg-black opacity-70" />
             </Transition.Child>
             <span
               className="inline-block h-screen align-middle"

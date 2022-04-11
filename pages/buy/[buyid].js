@@ -34,7 +34,7 @@ export default function Buy() {
             selectedIndex={selectedIndex}
             onChange={(i) => setSelectedIndex(i)}
           >
-            <Tab.List className="flex p-1 space-x-1 bg-blue-900/20 rounded-xl max-w-400 mx-auto">
+            <Tab.List className="flex p-1 space-x-1 bg-blue-900/20 rounded-xl  max-w-400 mx-auto">
               {categories.map((category) => (
                 <Tab
                   key={category}
@@ -54,7 +54,7 @@ export default function Buy() {
             </Tab.List>
             <Tab.Panels className="mt-6 max-w-400 mx-auto">
               <Tab.Panel
-                key={"Token"}
+                key={"Token"} 
                 className={classNames(
                   "rounded-xl p-6",
                   "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60 border border-1 border-white bg-blue-900/20"
