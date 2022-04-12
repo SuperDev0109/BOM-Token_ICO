@@ -1,0 +1,26 @@
+[
+  {
+    "name": "MATIC",
+    "address": "0x0000000000000000000000000000000000001010",
+    "symbol": "MATIC",
+    "decimals": 18
+  },
+  {
+    "name": "BUSD",
+    "address": "0xA02f6adc7926efeBBd59Fd43A84f4E0c0c91e832",
+    "symbol": "BUSD",
+    "decimals": 6
+  },
+  {
+    "name": "USDT",
+    "address": "0xA02f6adc7926efeBBd59Fd43A84f4E0c0c91e832",
+    "symbol": "USDT",
+    "decimals": 6
+  },
+  {
+    "name": "USDC",
+    "address": "0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c747",
+    "symbol": "USDC",
+    "decimals": 6
+  }
+]

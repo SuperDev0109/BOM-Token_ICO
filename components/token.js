@@ -1,12 +1,11 @@
 import React, { useState, useCallback, useEffect } from "react";
-import MetaMaskConnect from "../components/MetaMaskConnect";
 import DropDown from "../components/DropDown";
 import Web3 from "web3";
 import { tokenAddresses } from "../config/tokens";
 import { tokenABI } from "../config/token_abis";
 import { useWeb3React } from "@web3-react/core";
 import { useBalance } from "../hooks";
-import TokenListRinkeby from "../assets/token-list-rinkeby.json";
+import TokenList from "../assets/token-list-polygon.json";
 
 const calcRate = (coin) => {
   let rate = 1;
@@ -21,7 +20,7 @@ const calcRate = (coin) => {
 };
 
 export default function Token() {
-  const [selectedToken, setSelectedToken] = useState(TokenListRinkeby[0]);
+  const [selectedToken, setSelectedToken] = useState(TokenList[0]);
 
   const { active, account, activate, deactivate, library, chainId } =
     useWeb3React();
@@ -146,7 +145,7 @@ export default function Token() {
       <div className="flex flex-col">
         <div className="flex flex-row justify-between items-center mb-4">
           <DropDown
-            data={TokenListRinkeby}
+            data={TokenList}
             value={selectedToken}
             setValue={setSelectedToken}
           />
@@ -156,17 +155,17 @@ export default function Token() {
       <div className="flex flex-col">
         <div>BALANCE</div>
         <div className="field-input">
-            <input
-              className="w-full text-20 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
-              type="number"
-              min={0}
-              value={pay_amount}
-              onChange={(e) => {
-                setPayAmount(e.target.value);
-              }}
-            />
-          </div>
+          <input
+            className="w-full text-20 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
+            type="number"
+            min={0}
+            value={pay_amount}
+            onChange={(e) => {
+              setPayAmount(e.target.value);
+            }}
+          />
         </div>
+      </div>
       <div className="flex flex-col">
         <div>BOM</div>
         <div className="field-input">
