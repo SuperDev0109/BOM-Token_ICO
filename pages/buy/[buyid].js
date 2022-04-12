@@ -18,9 +18,9 @@ export default function Buy() {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   useEffect(() => {
-    if (kind === "token") {
+    if (kind === "bom-token") {
       setSelectedIndex(0);
-    } else if (kind === "nft") {
+    } else if (kind === "bom-nft") {
       setSelectedIndex(1);
     }
   }, []);
