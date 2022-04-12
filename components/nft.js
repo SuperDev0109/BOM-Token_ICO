@@ -9,7 +9,9 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { validateEmail } from "../util";
 import { create } from "ipfs-http-client";
-import {FaUserCircle} from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
+import { getBOMNFTContract } from "../store/contractStore";
+import { truncate } from "fs";
 
 const MySwal = withReactContent(Swal);
 const client = create("https://ipfs.infura.io:5001/api/v0");
@@ -24,6 +26,28 @@ export default function NFT() {
     criteriaMode: "all",
   });
 
+  const handleNFT = async () => {
+    return true;
+  };
+
+  const mintNFT = async (NFT_URI, token_id = 0) => {
+    console.log("NFT_URI, token_id", NFT_URI, token_id);
+    // await handleNFT(token_id, pay_amount);
+    const contract = getBOMNFTContract(library);
+    console.log("[Troica NFT] Started");
+
+    contract?.methods
+      .mint(NFT_URI, token_id)
+      .call()
+      .then(() => {
+        console.log("[TROICA NFT] OKOK ");
+      })
+      .catch((error) => {
+        console.log("[Troica NFT]", error);
+      });
+    console.log("[Troica NFT] Ended");
+  };
+
   const onSubmit = async (nft_data) => {
     try {
       const { path, cid, size } = await client.add(nft_data.image[0]);
@@ -36,6 +60,7 @@ export default function NFT() {
       const { path: nft_path } = await client.add(meta_json);
 
       console.log("nft_path:", nft_path);
+      mintNFT(nft_path);
 
       // const metaObj = { fname: "myfile.txt", lang: "plain-text", cid: cid };
 
@@ -86,8 +111,8 @@ export default function NFT() {
             src={preview}
             onClick={selectImage}
           />
-           <FaUserCircle />
-          
+          <FaUserCircle />
+
           <input
             ref={attachRef}
             className="absolute top-0 right-0 left-0 bottom-0 opacity-0 cursor-pointer"
@@ -99,7 +124,7 @@ export default function NFT() {
             {...register("image", {
               required: "Image is required.",
             })}
-            onChange={showPreview} 
+            onChange={showPreview}
           />
           <ErrorMessage
             errors={errors}

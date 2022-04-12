@@ -5,7 +5,13 @@ import { tokenAddresses } from "../config/tokens";
 import { tokenABI } from "../config/token_abis";
 import { useWeb3React } from "@web3-react/core";
 import { useBalance } from "../hooks";
-import TokenList from "../assets/token-list-polygon.json";
+import { TokenList } from "../assets/token-list-polygon.js";
+import {
+  getBOMICOContract,
+  getBUSDContract,
+  getUSDCContract,
+} from "../store/contractStore";
+import { BUSD_ADDRESS } from "../assets/polygon-abis";
 
 const calcRate = (coin) => {
   let rate = 1;
@@ -75,49 +81,36 @@ export default function Token() {
     return;
   };
 
-  const metaMaskPay = async (token_id) => {
-    await handleTransfer(token_id, pay_amount);
+  const swapToken = async () => {
+    console.log("Pay, Buy amount", pay_amount, buy_amount);
+    // await handleTransfer(token_id, pay_amount);
+    const contract = getBOMICOContract(library);
+    console.log("[Troica] Started");
 
-    // if (token_id === 0) {
-    //   web3.eth.sendTransaction(
-    //     {
-    //       to: toAddress,
-    //       value: web3.toWei(pay_amount, "ether"),
-    //     },
-    //     (err, transactionId) => {
-    //       if (err) {
-    //         console.log("Payment failed", err);
-    //       } else {
-    //         console.log("Payment successful", transactionId);
-    //       }
-    //     }
-    //   );
-    // } else {
-    //   let privateKey = Buffer.from("key", "hex");
-    //   const Tx = require("ethereumjs-tx").Transaction;
+    if (selectedToken.symbol === "MATIC") {
+    } else {
+      if (selectedToken.symbol === "BUSD") {
+        const busd_contract = getBUSDContract(library);
+        busd_contract.approve(BUSD_ADDRESS, pay_amount);
+      } else if (selectedToken.symbol === "USDT") {
+        const usdt_contract = getUSDCContract(library);
+        usdt_contract.approve(USDT_ADDRESS, pay_amount);
+      } else if (selectedToken.symbol === "USDC") {
+        const usdc_contract = getUSDCContract(library);
+        usdc_contract.approve(USDC_ADDRESS, pay_amount);
+      }
 
-    //   const token = tokenAddresses[token_id];
-    //   let tokenInst = new web3.eth.Contract(tokenABI, token.address, {
-    //     from: fromAddress,
-    //   });
-    //   let amount = web3.utils.toHex(pay_amount);
-    //   web3.eth.getTransactionCount(fromAddress).then((count) => {
-    //     let rawTransaction = {
-    //       from: fromAddress,
-    //       gasPrice: web3.utils.toHex(20 * 1e9),
-    //       gasLimit: web3.utils.toHex(210000),
-    //       to: token.address,
-    //       value: 0x0,
-    //       data: tokenInst.methods.transfer(toAddress, amount).encodeABI(),
-    //       nonce: web3.utils.toHex(count),
-    //     };
-    //     let transaction = new Tx(rawTransaction);
-    //     transaction.sign(privateKey);
-    //     web3.eth
-    //       .sendSignedTransaction("0x" + transaction.serialize().toString("hex"))
-    //       .on("transactionHash", console.log);
-    //   });
-    // }
+      contract?.methods
+        .invest(pay_amount, token_id)
+        .call()
+        .then((bomTokenAmount) => {
+          console.log("[TROICA] OKOK ", bomTokenAmount);
+        })
+        .catch((error) => {
+          console.log("[Troica]", error);
+        });
+      console.log("[Troica] Ended");
+    }
   };
 
   useEffect(() => {
@@ -185,7 +178,7 @@ export default function Token() {
         <div>{rate} USDT per 1 BOM</div>
       </div>
       <div className="grid-cols-1 grid gap-4 mt-4">
-        <button className="btn-primary w-full" onClick={() => metaMaskPay(0)}>
+        <button className="btn-primary w-full" onClick={swapToken}>
           Swap
         </button>
       </div>
