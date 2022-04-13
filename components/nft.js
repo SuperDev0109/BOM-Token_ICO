@@ -11,7 +11,8 @@ import { validateEmail } from "../util";
 import { create } from "ipfs-http-client";
 import { FaUserCircle } from "react-icons/fa";
 import { getBOMNFTContract } from "../store/contractStore";
-import { truncate } from "fs";
+import { useWeb3React } from "@web3-react/core";
+import WalletDialog from "./WalletDialog";
 
 const MySwal = withReactContent(Swal);
 const client = create("https://ipfs.infura.io:5001/api/v0");
@@ -25,6 +26,9 @@ export default function NFT() {
   } = useForm({
     criteriaMode: "all",
   });
+
+  const { active, account, activate, deactivate, library, chainId } =
+    useWeb3React();
 
   const handleNFT = async () => {
     return true;
@@ -102,154 +106,171 @@ export default function NFT() {
     }
   };
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="grid-cols-1 grid gap-4 mt-0">
-        <div className="field-input relative flex justify-center items-center h-100px rounded-md">
-          <img
-            className=" w-full h-full object-contain absolute top-0 left-0 z-100"
-            src={preview}
-            onClick={selectImage}
-          />
-          <FaUserCircle />
+  let [isOpen, setIsOpen] = useState(false);
 
-          <input
-            ref={attachRef}
-            className="absolute top-0 right-0 left-0 bottom-0 opacity-0 cursor-pointer"
-            accept="image/*"
-            type="file"
-            id="image"
-            name="image"
-            placeholder="Image"
-            {...register("image", {
-              required: "Image is required.",
-            })}
-            onChange={showPreview}
-          />
-          <ErrorMessage
-            errors={errors}
-            name="image"
-            render={({ messages }) =>
-              messages &&
-              Object.entries(messages).map(([type, message]) => (
-                <p key={type} className="text-red-500">
-                  {message}
-                </p>
-              ))
-            }
-          />
-        </div>
-        <div className="field-input">
-          <input
-            className="w-full text-16 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Name"
-            {...register("name", {
-              required: "Name is required.",
-            })}
-          />
-          <ErrorMessage
-            errors={errors}
-            name="name"
-            render={({ messages }) =>
-              messages &&
-              Object.entries(messages).map(([type, message]) => (
-                <p key={type} className="text-red-500">
-                  {message}
-                </p>
-              ))
-            }
-          />
-        </div>
-        <div className="field-input">
-          <input
-            className="w-full text-16 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
-            type="text"
-            id="link"
-            name="link"
-            placeholder="External Link"
-            {...register("link", {
-              required: "link is required.",
-            })}
-          />
-          <ErrorMessage
-            errors={errors}
-            name="link"
-            render={({ messages }) =>
-              messages &&
-              Object.entries(messages).map(([type, message]) => (
-                <p key={type} className="text-red-500">
-                  {message}
-                </p>
-              ))
-            }
-          />
-        </div>
-        <div className="field-input">
-          <textarea
-            className="w-full text-16 p-2 px-4 h-[150px] font-poppins bg-white/20 text-white rounded-md"
-            id="description"
-            name="description"
-            placeholder="Description"
-            {...register("description", {
-              required: "Description is required.",
-            })}
-          ></textarea>
-          <ErrorMessage
-            errors={errors}
-            name="description"
-            render={({ messages }) =>
-              messages &&
-              Object.entries(messages).map(([type, message]) => (
-                <p key={type} className="text-red-500">
-                  {message}
-                </p>
-              ))
-            }
-          />
-        </div>
-        <div className="field-input">
-          <input
-            className="w-full text-16 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
-            type="text"
-            id="supply"
-            name="supply"
-            placeholder="Supply"
-            {...register("supply", {
-              required: "Supply is required.",
-            })}
-          />
-          <ErrorMessage
-            errors={errors}
-            name="supply"
-            render={({ messages }) =>
-              messages &&
-              Object.entries(messages).map(([type, message]) => (
-                <p key={type} className="text-red-500">
-                  {message}
-                </p>
-              ))
-            }
-          />
-        </div>
-        <div className="">
-          <button
-            className="btn-primary w-full"
-            type="submit"
-            disabled={isSubmitting}
-          >
-            {isSubmitting && (
-              <>
-                <i className="fas fa-cog fa-spin mr-4" />
-                Creating
-              </>
+  return (
+    <>
+      <WalletDialog isOpen={isOpen} setIsOpen={setIsOpen} />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="grid-cols-1 grid gap-4 mt-0">
+          <div className="field-input relative flex justify-center items-center h-100px rounded-md">
+            <img
+              className=" w-full h-full object-contain absolute top-0 left-0 z-100"
+              src={preview}
+              onClick={selectImage}
+            />
+            <FaUserCircle />
+
+            <input
+              ref={attachRef}
+              className="absolute top-0 right-0 left-0 bottom-0 opacity-0 cursor-pointer"
+              accept="image/*"
+              type="file"
+              id="image"
+              name="image"
+              placeholder="Image"
+              {...register("image", {
+                required: "Image is required.",
+              })}
+              onChange={showPreview}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="image"
+              render={({ messages }) =>
+                messages &&
+                Object.entries(messages).map(([type, message]) => (
+                  <p key={type} className="text-red-500">
+                    {message}
+                  </p>
+                ))
+              }
+            />
+          </div>
+          <div className="field-input">
+            <input
+              className="w-full text-16 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Name"
+              {...register("name", {
+                required: "Name is required.",
+              })}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="name"
+              render={({ messages }) =>
+                messages &&
+                Object.entries(messages).map(([type, message]) => (
+                  <p key={type} className="text-red-500">
+                    {message}
+                  </p>
+                ))
+              }
+            />
+          </div>
+          <div className="field-input">
+            <input
+              className="w-full text-16 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
+              type="text"
+              id="link"
+              name="link"
+              placeholder="External Link"
+              {...register("link", {
+                required: "link is required.",
+              })}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="link"
+              render={({ messages }) =>
+                messages &&
+                Object.entries(messages).map(([type, message]) => (
+                  <p key={type} className="text-red-500">
+                    {message}
+                  </p>
+                ))
+              }
+            />
+          </div>
+          <div className="field-input">
+            <textarea
+              className="w-full text-16 p-2 px-4 h-[150px] font-poppins bg-white/20 text-white rounded-md"
+              id="description"
+              name="description"
+              placeholder="Description"
+              {...register("description", {
+                required: "Description is required.",
+              })}
+            ></textarea>
+            <ErrorMessage
+              errors={errors}
+              name="description"
+              render={({ messages }) =>
+                messages &&
+                Object.entries(messages).map(([type, message]) => (
+                  <p key={type} className="text-red-500">
+                    {message}
+                  </p>
+                ))
+              }
+            />
+          </div>
+          <div className="field-input">
+            <input
+              className="w-full text-16 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
+              type="text"
+              id="supply"
+              name="supply"
+              placeholder="Supply"
+              {...register("supply", {
+                required: "Supply is required.",
+              })}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="supply"
+              render={({ messages }) =>
+                messages &&
+                Object.entries(messages).map(([type, message]) => (
+                  <p key={type} className="text-red-500">
+                    {message}
+                  </p>
+                ))
+              }
+            />
+          </div>
+          <div className="">
+            {active && (
+              <button
+                className="btn-primary w-full"
+                type="submit"
+                disabled={isSubmitting}
+              >
+                {isSubmitting && (
+                  <>
+                    <i className="fas fa-cog fa-spin mr-4" />
+                    Creating
+                  </>
+                )}
+                {!isSubmitting && <>Mint</>}
+              </button>
             )}
-            {!isSubmitting && <>Mint</>}
-          </button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+      {!active && (
+        <button
+          className="btn-primary w-full"
+          onClick={() => {
+            setIsOpen(true);
+          }}
+        >
+          Connect Wallet
+        </button>
+      )}
+    </>
   );
 }

@@ -11,7 +11,10 @@ import {
   getBUSDContract,
   getUSDCContract,
 } from "../store/contractStore";
-import { BUSD_ADDRESS } from "../assets/polygon-abis";
+import { BUSD_ADDRESS, USDT_ADDRESS } from "../assets/polygon-abis";
+import WalletDialog from "./WalletDialog";
+
+const ratio = 100000000000000000;
 
 const calcRate = (coin) => {
   let rate = 1;
@@ -40,64 +43,26 @@ export default function Token() {
   const [buy_amount, setBuyAmount] = useState(0);
   const [rate, setRate] = useState(1);
 
-  const handleGetTokenBalance = async (token_id) => {
-    const eth_balance = await web3.eth.getBalance(fromAddress);
-
-    setEthBalance(eth_balance);
-
-    if (token_id == 0) {
-      return eth_balance;
-    }
-    token_id -= 1;
-    // *******************************
-    // To Do
-    // Check if token_id is valid
-    if (token_id >= tokenAddresses.length) {
-      console.log("ERROR: Invalid Token ID");
-    }
-    const token = tokenAddresses[token_id];
-    const tokenInst = new web3.eth.Contract(tokenABI, token.address);
-    let tokenBalance = await tokenInst.methods.balanceOf(fromAddress).call();
-    const decimals = await tokenInst.methods.decimals().call();
-    tokenBalance = tokenBalance / 10 ** decimals;
-    return tokenBalance;
-  };
-
-  const handleTransfer = async (token_id, send_amount) => {
-    const balance = await handleGetTokenBalance(token_id);
-    console.log(balance);
-
-    if (balance < send_amount) {
-      console.log("Balance is less than send amount:", balance, pay_amount);
-      return;
-    }
-    console.log("Balance is enough than send amount:", balance, pay_amount);
-
-    if (token_id == 0) {
-      return;
-    }
-    token_id -= 1;
-
-    return;
-  };
-
   const swapToken = async () => {
-    console.log("Pay, Buy amount", pay_amount, buy_amount);
-    // await handleTransfer(token_id, pay_amount);
+    console.log("Swap:", pay_amount, buy_amount, balance);
+
     const contract = getBOMICOContract(library);
     console.log("[Troica] Started");
 
     if (selectedToken.symbol === "MATIC") {
+      // await contract.methods
+      //   .payToMint(title, description)
+      //   .send({ from: buyer, value: cost });
     } else {
       if (selectedToken.symbol === "BUSD") {
         const busd_contract = getBUSDContract(library);
-        busd_contract.approve(BUSD_ADDRESS, pay_amount);
+        busd_contract?.methods.approve(BUSD_ADDRESS, pay_amount);
       } else if (selectedToken.symbol === "USDT") {
         const usdt_contract = getUSDCContract(library);
-        usdt_contract.approve(USDT_ADDRESS, pay_amount);
+        usdt_contract?.methods.approve(USDT_ADDRESS, pay_amount);
       } else if (selectedToken.symbol === "USDC") {
         const usdc_contract = getUSDCContract(library);
-        usdc_contract.approve(USDC_ADDRESS, pay_amount);
+        usdc_contract?.methods.approve(USDC_ADDRESS, pay_amount);
       }
 
       contract?.methods
@@ -122,19 +87,22 @@ export default function Token() {
   }, [selectedToken]);
 
   useEffect(() => {
-    if (buy_amount * 100 * rate !== pay_amount * 100) {
-      setPayAmount((buy_amount * 100 * rate) / 100);
+    if (buy_amount * ratio * rate !== pay_amount * ratio) {
+      setPayAmount((buy_amount * ratio * rate) / ratio);
     }
   }, [buy_amount]);
 
   useEffect(() => {
-    if (buy_amount * 100 * rate != pay_amount * 100) {
-      setBuyAmount((pay_amount * 100) / (rate * 100));
+    if (buy_amount * ratio * rate != pay_amount * ratio) {
+      setBuyAmount((pay_amount * ratio) / (rate * ratio));
     }
   }, [pay_amount]);
 
+  let [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="flex flex-col gap-4">
+      <WalletDialog isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className="flex flex-col">
         <div className="flex flex-row justify-between items-center mb-4">
           <DropDown
@@ -152,6 +120,7 @@ export default function Token() {
             className="w-full text-20 p-2 pr-4 pl-4 font-poppins bg-white/20 text-white rounded-md"
             type="number"
             min={0}
+            max={balance}
             value={pay_amount}
             onChange={(e) => {
               setPayAmount(e.target.value);
@@ -175,12 +144,24 @@ export default function Token() {
       </div>
       <div className="flex flex-row justify-between">
         <div>Rate</div>
-        <div>{rate} USDT per 1 BOM</div>
+        <div>{rate}USDT / 1BOM</div>
       </div>
       <div className="grid-cols-1 grid gap-4 mt-4">
-        <button className="btn-primary w-full" onClick={swapToken}>
-          Swap
-        </button>
+        {active && (
+          <button className="btn-primary w-full" onClick={swapToken}>
+            Swap
+          </button>
+        )}
+        {!active && (
+          <button
+            className="btn-primary w-full"
+            onClick={() => {
+              setIsOpen(true);
+            }}
+          >
+            Connect Wallet
+          </button>
+        )}
       </div>
     </div>
   );
