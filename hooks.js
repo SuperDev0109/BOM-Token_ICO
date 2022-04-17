@@ -51,7 +51,6 @@ export function useBalance(tokenAddress, decimals) {
 
     async function run() {
       const bn = await getBalance();
-      console.log("Current balance:", bn);
       if (!isCancelled) {
         const pow = new BigNumber("10").pow(new BigNumber(decimals));
         setBalance(web3BNToFloatString(bn, pow, 4, BigNumber.ROUND_DOWN));

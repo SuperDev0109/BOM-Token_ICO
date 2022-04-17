@@ -1,6 +1,6 @@
 export const _info_BOMICO = {
   name: "BOM ICO",
-  address: "0x04b5Ed7B46b911b9dFCBD5b47f525eE5034AFda4",
+  address: "0x6f33dd685aa8ca46d1b49be7e176dc2b9ec4b1c4",
   decimals: 10,
   abi: [
     {

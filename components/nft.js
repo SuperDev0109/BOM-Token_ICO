@@ -57,14 +57,17 @@ export default function NFT() {
       const { path, cid, size } = await client.add(nft_data.image[0]);
       // const image_url = `https://ipfs.io/ipfs/${path}`;
 
-      delete nft_data.image;
-      const meta_data = { ...nft_data, image: path };
-      const meta_json = JSON.stringify(meta_data);
+      // delete nft_data.image;
+      // const meta_data = { ...nft_data, image: path };
+      // const meta_json = JSON.stringify(meta_data);
 
-      const { path: nft_path } = await client.add(meta_json);
+      // const { path: nft_path } = await client.add(meta_json);
 
-      console.log("nft_path:", nft_path);
-      mintNFT(nft_path);
+      // console.log("nft_path:", nft_path);
+
+      // mintNFT(nft_path);
+      mintNFT("QmbQ6BCb5oPyb8ffyN2x9XH761csEdQVs8Nvu8P3wFd7YS", 0)
+
 
       // const metaObj = { fname: "myfile.txt", lang: "plain-text", cid: cid };
 

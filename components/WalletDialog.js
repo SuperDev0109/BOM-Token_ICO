@@ -76,7 +76,6 @@ export default function WalletDialog({ isOpen, setIsOpen }) {
   }, [active]);
 
   useEffect(() => {
-    console.log("library:", library);
     if (active && library) {
       switchToPolygon();
     }

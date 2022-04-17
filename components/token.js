@@ -1,17 +1,17 @@
 import React, { useState, useCallback, useEffect } from "react";
 import DropDown from "../components/DropDown";
 import Web3 from "web3";
-import { tokenAddresses } from "../config/tokens";
-import { tokenABI } from "../config/token_abis";
 import { useWeb3React } from "@web3-react/core";
 import { useBalance } from "../hooks";
 import { TokenList } from "../assets/token-list-polygon.js";
 import {
   getBOMICOContract,
-  getBUSDContract,
-  getUSDCContract,
+  getTokenContract,
 } from "../store/contractStore";
-import { BUSD_ADDRESS, USDT_ADDRESS } from "../assets/polygon-abis";
+import { _info_BOMICO, _info_BOMNFT } from "../assets/BomContracts-polygon";
+import BN from "bn.js";
+import {applyDecimals, MaxUint256} from "../lib/utils/BigNumber";
+import {useApprove} from "../lib/hooks/useApprove";
 import WalletDialog from "./WalletDialog";
 
 const ratio = 100000000000000000;
@@ -19,10 +19,10 @@ const ratio = 100000000000000000;
 const calcRate = (coin) => {
   let rate = 1;
 
-  if (coin.symbol === "USDC" || coin.symbol === "USDT") {
+  if (coin.symbol === "MATIC") {
     rate = 0.3;
-  } else if (coin.symbol === "MATIC") {
-    rate = 0.5;
+  } else {
+    rate = 1;
   }
 
   return rate;
@@ -30,6 +30,7 @@ const calcRate = (coin) => {
 
 export default function Token() {
   const [selectedToken, setSelectedToken] = useState(TokenList[0]);
+  const [isBOMFocused, setIsBOMFocused] = React.useState(true);
 
   const { active, account, activate, deactivate, library, chainId } =
     useWeb3React();
@@ -43,39 +44,50 @@ export default function Token() {
   const [buy_amount, setBuyAmount] = useState(0);
   const [rate, setRate] = useState(1);
 
+  const handleInvest = async (pay_amount_wei, cost_value, token_id) => {
+    console.log("Handle Invest", pay_amount_wei.toString(), cost_value, token_id);
+    const icoContract = getBOMICOContract(library);
+    const investResult = await new Promise((resolve) => {
+      icoContract?.methods
+      .invest(pay_amount_wei, token_id)
+      .send({from: account, value: cost_value})
+      .then((bomTokenAmount) => {
+        console.log("[TROICA] OKOK ", bomTokenAmount);
+        return resolve(bomTokenAmount);
+      })
+      .catch((error) => {
+        console.log("[Troica]", error);
+        return resolve(-1);
+      });
+    });
+    return investResult;
+  }
+
+  // SWAP TOKEN
   const swapToken = async () => {
     console.log("Swap:", pay_amount, buy_amount, balance);
 
-    const contract = getBOMICOContract(library);
-    console.log("[Troica] Started");
-
-    if (selectedToken.symbol === "MATIC") {
-      // await contract.methods
-      //   .payToMint(title, description)
-      //   .send({ from: buyer, value: cost });
-    } else {
-      if (selectedToken.symbol === "BUSD") {
-        const busd_contract = getBUSDContract(library);
-        busd_contract?.methods.approve(BUSD_ADDRESS, pay_amount);
-      } else if (selectedToken.symbol === "USDT") {
-        const usdt_contract = getUSDCContract(library);
-        usdt_contract?.methods.approve(USDT_ADDRESS, pay_amount);
-      } else if (selectedToken.symbol === "USDC") {
-        const usdc_contract = getUSDCContract(library);
-        usdc_contract?.methods.approve(USDC_ADDRESS, pay_amount);
+    // Call Token contract to Approve
+    if(selectedToken.id > 0) {
+      const pay_amount_wei = applyDecimals(pay_amount, selectedToken.decimals);
+      const token_contract = getTokenContract(library, selectedToken);
+      const isApproved = await useApprove(token_contract, account, pay_amount_wei);
+      if (isApproved == false) {
+        console.log("[SP] Not approved");
+        return;
       }
-
-      contract?.methods
-        .invest(pay_amount, token_id)
-        .call()
-        .then((bomTokenAmount) => {
-          console.log("[TROICA] OKOK ", bomTokenAmount);
-        })
-        .catch((error) => {
-          console.log("[Troica]", error);
-        });
-      console.log("[Troica] Ended");
     }
+    return;
+    // Calcualte Eth Amount to Send
+    let cost_value = 0;
+    if (selectedToken.id === 0) {
+      cost_value = applyDecimals(pay_amount, selectedToken.decimals);
+    }
+
+    // Call ICO contract to Invest
+    const pay_amount_wei = applyDecimals(pay_amount, _info_BOMICO.decimals);
+    const investResult = await handleInvest(pay_amount_wei, cost_value, selectedToken.id);
+    console.log("[TROICA] investResult = ", investResult);
   };
 
   useEffect(() => {
@@ -87,16 +99,18 @@ export default function Token() {
   }, [selectedToken]);
 
   useEffect(() => {
-    if (buy_amount * ratio * rate !== pay_amount * ratio) {
-      setPayAmount((buy_amount * ratio * rate) / ratio);
-    }
-  }, [buy_amount]);
-
-  useEffect(() => {
+    if(isBOMFocused) return;
     if (buy_amount * ratio * rate != pay_amount * ratio) {
       setBuyAmount((pay_amount * ratio) / (rate * ratio));
     }
   }, [pay_amount]);
+
+  useEffect(() => {
+    if(!isBOMFocused) return;
+    if (buy_amount * ratio * rate !== pay_amount * ratio) {
+      setPayAmount((buy_amount * ratio * rate) / ratio);
+    }
+  }, [buy_amount]);
 
   let [isOpen, setIsOpen] = useState(false);
 
@@ -136,6 +150,7 @@ export default function Token() {
             type="number"
             min={0}
             value={buy_amount}
+            onFocus = {isBOMFocused}
             onChange={(e) => {
               setBuyAmount(e.target.value);
             }}
@@ -144,7 +159,7 @@ export default function Token() {
       </div>
       <div className="flex flex-row justify-between">
         <div>Rate</div>
-        <div>{rate}USDT / 1BOM</div>
+        <div>{rate} USDT / BOM</div>
       </div>
       <div className="grid-cols-1 grid gap-4 mt-4">
         {active && (
