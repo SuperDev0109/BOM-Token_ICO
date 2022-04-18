@@ -11,7 +11,7 @@ import {
 import { _info_BOMICO, _info_BOMNFT } from "../assets/BomContracts-polygon";
 import BN from "bn.js";
 import {applyDecimals, MaxUint256} from "../lib/utils/BigNumber";
-import {useApprove} from "../lib/hooks/useApprove";
+import {handleApprove} from "../lib/contractHandles/handleApprove";
 import WalletDialog from "./WalletDialog";
 
 const ratio = 100000000000000000;
@@ -71,7 +71,7 @@ export default function Token() {
     if(selectedToken.id > 0) {
       const pay_amount_wei = applyDecimals(pay_amount, selectedToken.decimals);
       const token_contract = getTokenContract(library, selectedToken);
-      const isApproved = await useApprove(token_contract, account, pay_amount_wei);
+      const isApproved = await handleApprove(token_contract, account, pay_amount_wei);
       if (isApproved == false) {
         console.log("[SP] Not approved");
         return;
@@ -149,7 +149,7 @@ export default function Token() {
             type="number"
             min={0}
             value={buy_amount}
-            onFocus = {isBOMFocused}
+            onFocus = {setIsBOMFocused}
             onChange={(e) => {
               setBuyAmount(e.target.value);
             }}
