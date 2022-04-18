@@ -77,10 +77,9 @@ export default function Token() {
         return;
       }
     }
-    return;
     // Calcualte Eth Amount to Send
     let cost_value = 0;
-    if (selectedToken.id === 0) {
+    if (selectedToken.id == 0) {
       cost_value = applyDecimals(pay_amount, selectedToken.decimals);
     }
 

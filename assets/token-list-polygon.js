@@ -27,11 +27,5 @@ export const TokenList = [
     symbol: "USDC",
     decimals: 18,
   },
-  {
-    id : 3,
-    name: "BOMT",
-    address: "0x168f9fFe9e452312cb5b305C0c5449f226FF2d5D",
-    symbol: "BOMT",
-    decimals: 10,
-  },
+
 ];
